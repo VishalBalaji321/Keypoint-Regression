@@ -9,5 +9,8 @@ __pycache__/
 *.zip
 
 #Test and Train Data
-test/**
-training/**
+input/test/**
+input/training/**
+
+#Ignore Virtual Environment
+keypoint/**
