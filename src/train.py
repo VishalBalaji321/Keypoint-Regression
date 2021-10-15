@@ -81,6 +81,13 @@ for epoch in range(config.EPOCHS):
     val_loss.append(val_epoch_loss)
     print(f"Train Loss: {train_epoch_loss:.4f}")
     print(f'Val Loss: {val_epoch_loss:.4f}')
+    if (epoch % 5 == 0):
+        torch.save({
+            'epoch': config.EPOCHS,
+            'model_state_dict': model.state_dict(),
+            'optimizer_state_dict': optimizer.state_dict(),
+            'loss': criterion,
+            }, f"{config.OUTPUT_PATH}/model_{epoch}.pth")
 
 # loss plots
 plt.figure(figsize=(10, 7))
@@ -96,5 +103,5 @@ torch.save({
             'model_state_dict': model.state_dict(),
             'optimizer_state_dict': optimizer.state_dict(),
             'loss': criterion,
-            }, f"{config.OUTPUT_PATH}/model.pth")
+            }, f"{config.OUTPUT_PATH}/model_final.pth")
 print('DONE TRAINING')
