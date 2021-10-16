@@ -2,16 +2,20 @@ import torch.nn as nn
 import torch.nn.functional as F
 import pretrainedmodels
 
-class FaceKeypointResNet50(nn.Module):
-    def __init__(self, pretrained, requires_grad):
-        super(FaceKeypointResNet50, self).__init__()
+class FaceKeypointResNet(nn.Module):
+    def __init__(self, pretrained, requires_grad, model='resnet18'):
+        if model not in ['resnet18', 'resnet34', 'resnet50']:
+            print("Invalid ResNet Model. Only accepted 'resnet18', 'resnet34' or 'resnet50'")
+            exit()
+        
+        super(FaceKeypointResNet, self).__init__()
         
         if pretrained == True:
             # Change to resnet18 or resnet50
-            self.model = pretrainedmodels.__dict__['resnet18'](pretrained='imagenet')
+            self.model = pretrainedmodels.__dict__[model](pretrained='imagenet')
         else:
             # Change to resnet18 or resnet50
-            self.model = pretrainedmodels.__dict__['resnet18'](pretrained=None)
+            self.model = pretrainedmodels.__dict__[model](pretrained=None)
         
         if requires_grad == True:
             for param in self.model.parameters():

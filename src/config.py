@@ -3,6 +3,8 @@ import torch
 # constant paths
 ROOT_PATH = '../input'
 OUTPUT_PATH = '../outputs'
+RESNET_MODEL = 'resnet18'
+
 # learning parameters
 BATCH_SIZE = 32
 LR = 0.001

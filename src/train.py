@@ -6,7 +6,7 @@ import matplotlib
 import config
 import utils
 
-from model import FaceKeypointResNet50
+from model import FaceKeypointResNet
 from dataset import train_data, train_loader, valid_data, valid_loader
 from tqdm import tqdm
 
@@ -61,7 +61,7 @@ def validate(model, dataloader, data, epoch):
     return valid_loss
 
 # model 
-model = FaceKeypointResNet50(pretrained=True, requires_grad=True).to(config.DEVICE)
+model = FaceKeypointResNet(pretrained=True, requires_grad=True, model=config.RESNET_MODEL).to(config.DEVICE)
 
 # optimizer
 optimizer = optim.Adam(model.parameters(), lr=config.LR)
