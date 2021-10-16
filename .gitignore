@@ -7,10 +7,12 @@ __pycache__/
 
 # Zip Files
 *.zip
+*.pth
 
 #Test and Train Data
 input/test/**
 input/training/**
+outputs/**
 
 #Ignore Virtual Environment
 keypoint/**

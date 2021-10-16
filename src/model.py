@@ -7,9 +7,11 @@ class FaceKeypointResNet50(nn.Module):
         super(FaceKeypointResNet50, self).__init__()
         
         if pretrained == True:
-            self.model = pretrainedmodels.__dict__['resnet50'](pretrained='imagenet')
+            # Change to resnet18 or resnet50
+            self.model = pretrainedmodels.__dict__['resnet18'](pretrained='imagenet')
         else:
-            self.model = pretrainedmodels.__dict__['resnet50'](pretrained=None)
+            # Change to resnet18 or resnet50
+            self.model = pretrainedmodels.__dict__['resnet18'](pretrained=None)
         
         if requires_grad == True:
             for param in self.model.parameters():
@@ -21,7 +23,9 @@ class FaceKeypointResNet50(nn.Module):
             print('Freezing intermediate layer parameters...')
         
         # change the final layer
-        self.l0 = nn.Linear(2048, 136)
+        # Change to (512, 136) for resnet18
+        # Change to (2048, 136) for resnet50
+        self.l0 = nn.Linear(512, 136)
 
 
     def forward(self, x):
