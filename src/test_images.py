@@ -4,7 +4,7 @@ import cv2
 import os
 import config
 import time
-from model import FaceKeypointResNet50
+from model import KeypointEfficientNet, KeypointResNet
 
 def InferFrame(model, frame, size=224):
     with torch.no_grad():
@@ -33,8 +33,14 @@ def InferFrame(model, frame, size=224):
 
 
 #img = cv2.imread(f'{config.ROOT_PATH}/test/Abdel_Aziz_Al-Hakim_10.jpg')
-model = FaceKeypointResNet50(pretrained=False, requires_grad=False).to(config.DEVICE)
+model = KeypointResNet(pretrained=False, requires_grad=False).to(config.DEVICE)
+
+#model = KeypointEfficientNet(pretrained=False, requires_grad=False)
+#model = model.return_loaded_model().to(config.DEVICE)
+
 checkpoint = torch.load('../weights/resnet18_30_epochs.pth', map_location=torch.device('cpu'))
+#checkpoint = torch.load('../weights/efficientNet-b0_full_30_epochs.pth', map_location=torch.device('cpu'))
+
 model.load_state_dict(checkpoint['model_state_dict'])
 model.eval()
 
@@ -42,13 +48,13 @@ TEST_IMAGES_DIR = f'{config.ROOT_PATH}/test'
 for files in os.listdir(TEST_IMAGES_DIR):
     if files.endswith(".jpg") or files.endswith(".png") or files.endswith(".bmp"):
         img = cv2.imread(f'{TEST_IMAGES_DIR}/{files}')
-        if not os.path.isdir(f'{config.OUTPUT_PATH}/test_inference_images'):
-            os.makedirs(f'{config.OUTPUT_PATH}/test_inference_images')
+        if not os.path.isdir(f'{config.OUTPUT_PATH}/test_inference_images_effnet'):
+            os.makedirs(f'{config.OUTPUT_PATH}/test_inference_images_effnet')
         
         t1 = time.time()
         final_img = InferFrame(model, img)
         t2 = time.time()
         print(f"Inference Speed: {1/(t2 - t1):.2f}fps")
-        cv2.imwrite(f'{config.OUTPUT_PATH}/test_inference_images/{files}', final_img)
+        cv2.imwrite(f'{config.OUTPUT_PATH}/test_inference_images_effnet/{files}', final_img)
 #cv2.waitKey()
 

@@ -66,3 +66,6 @@ class KeypointEfficientNet():
             for param in self.model.parameters():
                 param.requires_grad = False
             print("Freezing all layers for inference......")
+    
+    def return_loaded_model(self):   
+        return self.model

@@ -11,7 +11,7 @@ class KeypointEfficientNet():
             self.model = EfficientNet.from_pretrained(model_name, num_classes=136)
         else:
             self.model = EfficientNet.from_name(model_name, num_classes=136)
-
+    
         if requires_grad == True:
             for name, param in self.model.named_parameters():
                 if 'fc' not in name:
@@ -23,6 +23,6 @@ class KeypointEfficientNet():
                 param.requires_grad = False
             print("Freezing all layers for inference......")
 
-        print(self.model)
+        print(self.model.parameters)
 
 KeypointEfficientNet(True, False)
