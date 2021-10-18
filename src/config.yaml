@@ -1,0 +1,33 @@
+dataset : ImageFolder # Type of data
+train_split: train
+val_split: validation
+model: tf_efficientnetv2_s_in21ft1k
+pretrained: True
+
+# Might need to change the below parameters if resuming the model training (given are default values)
+# initial-checkpoint: None
+# resume: None
+# --no-resume-opt: True
+
+num_classes: 136
+img_size: 224
+input_size: [3, 224, 224]
+
+# batch_size: 64
+# validation_batch_size: default (none)
+# lr: default(0.05) -> Learning rate
+epochs: 50 # Default 300
+decay_rate: 0.1 # Default
+
+output: ../outputs
+experiment: exp # Subfolder for each training output
+
+torchscript: True # !! Crucially important for doing inference (Potential speedup of 2x) !!
+log_wandb: False  # Disabling Weights and biases logging
+
+
+# For more parameters, please refer the training script. Only the important ones are mentioned here.
+# Replace the '-' with '_' in the argument values. 
+# For example: parser.add_argument('--num-classes', .......) is equivalent to 'num_classes: N' {N is an integer}
+
+

@@ -33,13 +33,13 @@ def InferFrame(model, frame, size=224):
 
 
 #img = cv2.imread(f'{config.ROOT_PATH}/test/Abdel_Aziz_Al-Hakim_10.jpg')
-model = KeypointResNet(pretrained=False, requires_grad=False).to(config.DEVICE)
+#model = KeypointResNet(pretrained=False, requires_grad=False).to(config.DEVICE)
 
-#model = KeypointEfficientNet(pretrained=False, requires_grad=False)
-#model = model.return_loaded_model().to(config.DEVICE)
+model = KeypointEfficientNet(pretrained=False, requires_grad=False, model_name='efficientnet-b2')
+model = model.return_loaded_model().to(config.DEVICE)
 
-checkpoint = torch.load('../weights/resnet18_30_epochs.pth', map_location=torch.device('cpu'))
-#checkpoint = torch.load('../weights/efficientNet-b0_full_30_epochs.pth', map_location=torch.device('cpu'))
+#checkpoint = torch.load('../weights/resnet18_30_epochs.pth', map_location=torch.device('cpu'))
+checkpoint = torch.load('../weights/efficientNet-b2_full_25_epochs.pth', map_location=torch.device('cpu'))
 
 model.load_state_dict(checkpoint['model_state_dict'])
 model.eval()
