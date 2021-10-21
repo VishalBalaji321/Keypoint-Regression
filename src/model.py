@@ -2,6 +2,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import pretrainedmodels
 from efficientnet_pytorch import EfficientNet
+import timm
 
 class KeypointResNet(nn.Module):
     def __init__(self, pretrained, requires_grad, model_name='resnet18'):
@@ -60,6 +61,25 @@ class KeypointEfficientNet():
             for name, param in self.model.named_parameters():
                 if 'fc' not in name:
                     param.requires_grad = False
+            print("Training just the final layer and freezing intermediate layers...")
+
+        if requires_grad == False:
+            for param in self.model.parameters():
+                param.requires_grad = False
+            print("Freezing all layers for inference......")
+    
+    def return_loaded_model(self):   
+        return self.model
+
+
+class KeypointCustom():
+    def __init__(self, isPretrained, requires_grad, model_name):
+
+        self.model = timm.create_model('tf_efficientnetv2_s_in21ft1k', pretrained=isPretrained, num_classes=136)
+
+        if requires_grad == True:
+            for name, param in self.model.named_parameters():
+                param.requires_grad = False
             print("Training just the final layer and freezing intermediate layers...")
 
         if requires_grad == False:

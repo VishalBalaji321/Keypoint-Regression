@@ -318,8 +318,8 @@ def _parse_args():
 def main():
     setup_default_logging()
     args, args_text = _parse_args()
-    #pprint(args)
-    #return
+    pprint(args)
+    return
 
     if args.log_wandb:
         if has_wandb:

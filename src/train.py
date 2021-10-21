@@ -5,8 +5,9 @@ import torch.nn as nn
 import matplotlib
 import config
 import utils
+import timm
 
-from model import KeypointResNet, KeypointEfficientNet
+from model import KeypointResNet, KeypointEfficientNet, KeypointCustom
 from dataset import train_data, train_loader, valid_data, valid_loader
 from tqdm import tqdm
 
@@ -62,7 +63,8 @@ def validate(model, dataloader, data, epoch):
 
 # model 
 #model = KeypointResNet(pretrained=True, requires_grad=True, model_name=config.RESNET_MODEL).to(config.DEVICE)
-model = KeypointEfficientNet(pretrained=True, requires_grad=True)
+#model = KeypointEfficientNet(pretrained=True, requires_grad=True)
+model = KeypointCustom(pretrained=True, requires_grad=True)
 model = model.return_loaded_model().to(config.DEVICE)
 
 # optimizer
