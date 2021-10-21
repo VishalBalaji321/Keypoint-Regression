@@ -64,7 +64,7 @@ def validate(model, dataloader, data, epoch):
 # model 
 #model = KeypointResNet(pretrained=True, requires_grad=True, model_name=config.RESNET_MODEL).to(config.DEVICE)
 #model = KeypointEfficientNet(pretrained=True, requires_grad=True)
-model = KeypointCustom(pretrained=True, requires_grad=True)
+model = KeypointCustom(isPretrained=True, requires_grad=True)
 model = model.return_loaded_model().to(config.DEVICE)
 
 # optimizer
