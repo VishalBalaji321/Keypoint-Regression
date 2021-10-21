@@ -1,3 +1,9 @@
+# Custom config file for Cone Detection
+
+# Only the important ones are mentioned here. For more parameters, please refer the training script.
+# Replace the '-' with '_' in the argument values. 
+# For example: parser.add_argument('--num-classes', .......) is equivalent to 'num_classes: N' {N is an integer}
+
 dataset : ImageFolder # Type of data
 train_split: train
 val_split: validation
@@ -9,7 +15,11 @@ pretrained: True
 # resume: None
 # --no-resume-opt: True
 
+# 136 for facial keypoints (68 Keypoints * 2 Coordinates per keypoint)
+# 16 for cone keypoints (8 Keypoints * 2 Coordinates per keypoint)
 num_classes: 136
+
+# 224 for the facial keypoints sample dataset. 80 for cone keypoints
 img_size: 224
 input_size: [3, 224, 224]
 
@@ -17,6 +27,8 @@ input_size: [3, 224, 224]
 # validation_batch_size: default (none)
 # lr: default(0.05) -> Learning rate
 epochs: 50 # Default 300
+decay_epochs: 45
+cooldown_epochs: 3
 decay_rate: 0.1 # Default
 
 output: ../outputs
@@ -25,9 +37,4 @@ experiment: exp # Subfolder for each training output
 torchscript: True # !! Crucially important for doing inference (Potential speedup of 2x) !!
 log_wandb: False  # Disabling Weights and biases logging
 
-
-# For more parameters, please refer the training script. Only the important ones are mentioned here.
-# Replace the '-' with '_' in the argument values. 
-# For example: parser.add_argument('--num-classes', .......) is equivalent to 'num_classes: N' {N is an integer}
-
-
+# EOF

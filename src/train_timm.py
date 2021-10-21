@@ -22,6 +22,7 @@ import logging
 from collections import OrderedDict
 from contextlib import suppress
 from datetime import datetime
+from pprint import pprint
 
 import torch
 import torch.nn as nn
@@ -317,8 +318,8 @@ def _parse_args():
 def main():
     setup_default_logging()
     args, args_text = _parse_args()
-    print(args)
-    return
+    #pprint(args)
+    #return
 
     if args.log_wandb:
         if has_wandb:
