@@ -23,12 +23,12 @@ def fit(model, dataloader, data):
     
     # calculate the number of batches
     num_batches = int(len(data)/dataloader.batch_size)
-
+    counter = 1
     #Creating a gradScaler at the beginning of the training
     scaler = GradScaler()
-
+    
     for i, data in tqdm(enumerate(dataloader), total=num_batches):
-        counter += 1
+        
         image, keypoints = data['image'].to(config.DEVICE), data['keypoints'].to(config.DEVICE)
         # flatten the keypoints
         keypoints = keypoints.view(keypoints.size(0), -1)
@@ -37,7 +37,9 @@ def fit(model, dataloader, data):
             outputs = model(image)
             loss = criterion(outputs, keypoints)
         
-        train_running_loss += loss.item()
+        if not loss.isnan():
+            train_running_loss += loss.detach().cpu().numpy()
+            counter += 1
         scaler.scale(loss).backward()
         #loss.backward()
         #optimizer.step()
@@ -52,18 +54,19 @@ def validate(model, dataloader, data, epoch):
     print('Validating')
     model.eval()
     valid_running_loss = 0.0
-    counter = 0
+    counter = 1
     # calculate the number of batches
     num_batches = int(len(data)/dataloader.batch_size)
     with torch.no_grad():
         for i, data in tqdm(enumerate(dataloader), total=num_batches):
-            counter += 1
+            
             image, keypoints = data['image'].to(config.DEVICE), data['keypoints'].to(config.DEVICE)
             # flatten the keypoints
             keypoints = keypoints.view(keypoints.size(0), -1)
             outputs = model(image)
             loss = criterion(outputs, keypoints)
-            valid_running_loss += loss.item()
+            if not loss.isnan():
+                valid_running_loss += loss.detach().cpu().numpy()
             # plot the predicted validation keypoints after every...
             # ... predefined number of epochs
             if (epoch+1) % 1 == 0 and i == 0:
