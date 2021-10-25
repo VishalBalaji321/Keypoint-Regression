@@ -45,8 +45,8 @@ class KeypointDataset(Dataset):
         # rescale keypoints according to image resize
         #keypoints = keypoints * [self.resize / orig_w, self.resize / orig_h]
         return {
-            'image': torch.tensor(image, dtype=torch.float, device=config.DEVICE),
-            'keypoints': torch.tensor(keypoints, dtype=torch.float, device=config.DEVICE),
+            'image': torch.tensor(image, dtype=torch.float),
+            'keypoints': torch.tensor(keypoints, dtype=torch.float),
         }
 
 # get the training and validation data samples
