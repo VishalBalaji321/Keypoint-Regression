@@ -1,5 +1,6 @@
 import torch
 import torch.optim as optim
+from torch.cuda.amp import GradScaler, autocast
 import matplotlib.pyplot as plt
 import torch.nn as nn
 import matplotlib
@@ -19,19 +20,29 @@ def fit(model, dataloader, data):
     model.train()
     train_running_loss = 0.0
     counter = 0
+    
     # calculate the number of batches
     num_batches = int(len(data)/dataloader.batch_size)
+
+    #Creating a gradScaler at the beginning of the training
+    scaler = GradScaler()
+
     for i, data in tqdm(enumerate(dataloader), total=num_batches):
         counter += 1
         image, keypoints = data['image'].to(config.DEVICE), data['keypoints'].to(config.DEVICE)
         # flatten the keypoints
         keypoints = keypoints.view(keypoints.size(0), -1)
         optimizer.zero_grad()
-        outputs = model(image)
-        loss = criterion(outputs, keypoints)
+        with autocast():
+            outputs = model(image)
+            loss = criterion(outputs, keypoints)
+        
         train_running_loss += loss.item()
-        loss.backward()
-        optimizer.step()
+        scaler.scale(loss).backward()
+        #loss.backward()
+        #optimizer.step()
+        scaler.step(optimizer)
+        scaler.update()
         
     train_loss = train_running_loss/counter
     return train_loss
