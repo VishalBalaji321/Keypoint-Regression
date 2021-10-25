@@ -99,9 +99,9 @@ for folders in os.listdir(MAIN_DIRECTORY):
                         new_row[index + 1] = y
 
                 new_dataset.append(new_row)
-            else:
-                new_row = [image_directory + row['_name'], np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan]
-                new_dataset.append(new_row)
+            #else:
+            #    new_row = [image_directory + row['_name'], np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan]
+            #    new_dataset.append(new_row)
             
     train, val = train_val_split(new_dataset)
 

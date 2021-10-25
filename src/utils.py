@@ -15,7 +15,7 @@ def valid_keypoints_plot(image, outputs, orig_keypoints, epoch):
     orig_keypoints = orig_keypoints.detach().cpu().numpy()
     
     # just get a single datapoint from each batch
-    random_index = random.randint(0, len(image))
+    random_index = random.randint(3, len(image)-2)
     img = image[random_index]
     output_keypoint = outputs[random_index]
     orig_keypoint = orig_keypoints[random_index]
