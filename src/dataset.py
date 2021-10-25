@@ -22,7 +22,7 @@ class KeypointDataset(Dataset):
     def __init__(self, samples, path):
         self.data = samples
         self.path = path
-        self.resize = 224
+        self.resize = 80
 
     def __len__(self):
         return len(self.data)
@@ -32,7 +32,7 @@ class KeypointDataset(Dataset):
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         orig_h, orig_w, channel = image.shape
         # resize the image into `resize` defined above
-        image = cv2.resize(image, (self.resize, self.resize))
+        #image = cv2.resize(image, (self.resize, self.resize))
         # again reshape to add grayscale channel format
         image = image / 255.0
         # transpose for getting the channel size to index 0
@@ -43,10 +43,10 @@ class KeypointDataset(Dataset):
         # reshape the keypoints
         keypoints = keypoints.reshape(-1, 2)
         # rescale keypoints according to image resize
-        keypoints = keypoints * [self.resize / orig_w, self.resize / orig_h]
+        #keypoints = keypoints * [self.resize / orig_w, self.resize / orig_h]
         return {
-            'image': torch.tensor(image, dtype=torch.float),
-            'keypoints': torch.tensor(keypoints, dtype=torch.float),
+            'image': torch.tensor(image, dtype=torch.float, device=config.DEVICE),
+            'keypoints': torch.tensor(keypoints, dtype=torch.float, device=config.DEVICE),
         }
 
 # get the training and validation data samples
@@ -56,7 +56,7 @@ class KeypointDataset(Dataset):
 # initialize the dataset - `FaceKeypointDataset()`
 train_data = KeypointDataset(pd.read_csv(f"{config.ROOT_PATH}/Train.csv"), 
                                  config.ROOT_PATH)
-valid_data = KeypointDataset(pd.read_csv(f"{config.ROOT_PATH}/Valid.csv"), 
+valid_data = KeypointDataset(pd.read_csv(f"{config.ROOT_PATH}/Validation.csv"), 
                                  config.ROOT_PATH)
 # prepare data loaders
 train_loader = DataLoader(train_data, 
