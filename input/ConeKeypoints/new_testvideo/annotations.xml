@@ -1,0 +1,2082 @@
+<?xml version="1.0" encoding="utf-8"?>
+<annotations>
+  <version>1.1</version>
+  <meta>
+    <task>
+      <id>132229</id>
+      <name>New_testVideo</name>
+      <size>143</size>
+      <mode>annotation</mode>
+      <overlap>0</overlap>
+      <bugtracker></bugtracker>
+      <created>2021-10-11 09:48:25.691523+01:00</created>
+      <updated>2021-10-17 20:53:22.955119+01:00</updated>
+      <subset>default</subset>
+      <start_frame>0</start_frame>
+      <stop_frame>142</stop_frame>
+      <frame_filter></frame_filter>
+      <segments>
+        <segment>
+          <id>213527</id>
+          <start>0</start>
+          <stop>142</stop>
+          <url>http://cvat.org/?id=213527</url>
+        </segment>
+      </segments>
+      <owner>
+        <username>sre21</username>
+        <email>henrik.radtke@schanzer-racing.de</email>
+      </owner>
+      <assignee></assignee>
+      <labels>
+        <label>
+          <name>K1</name>
+          <color>#ff0089</color>
+          <attributes>
+          </attributes>
+        </label>
+        <label>
+          <name>K2</name>
+          <color>#58c0e2</color>
+          <attributes>
+          </attributes>
+        </label>
+        <label>
+          <name>K3</name>
+          <color>#74ef83</color>
+          <attributes>
+          </attributes>
+        </label>
+        <label>
+          <name>K8</name>
+          <color>#ffa000</color>
+          <attributes>
+          </attributes>
+        </label>
+        <label>
+          <name>K4</name>
+          <color>#c214eb</color>
+          <attributes>
+          </attributes>
+        </label>
+        <label>
+          <name>K5</name>
+          <color>#8a6327</color>
+          <attributes>
+          </attributes>
+        </label>
+        <label>
+          <name>K6</name>
+          <color>#ddff33</color>
+          <attributes>
+          </attributes>
+        </label>
+        <label>
+          <name>K7</name>
+          <color>#ff0000</color>
+          <attributes>
+          </attributes>
+        </label>
+      </labels>
+    </task>
+    <dumped>2021-10-18 16:31:44.510331+01:00</dumped>
+  </meta>
+  <image id="142" name="Cone_99.jpg" width="80" height="80">
+    <points label="K2" occluded="0" source="manual" points="33.10,42.15" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="30.20,50.75" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="37.40,19.65" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="48.00,53.65" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="45.20,29.95" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="43.10,19.45" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="45.90,41.85" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="35.10,29.45" z_order="0">
+    </points>
+  </image>
+  <image id="141" name="Cone_98.jpg" width="80" height="80">
+    <points label="K3" occluded="0" source="manual" points="34.70,34.15" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="44.30,33.65" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="42.00,21.75" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="45.60,42.95" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="48.30,54.05" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="30.60,53.95" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="32.80,43.85" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="36.80,21.95" z_order="0">
+    </points>
+  </image>
+  <image id="140" name="Cone_97.jpg" width="80" height="80">
+    <points label="K1" occluded="0" source="manual" points="31.40,54.25" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="34.70,43.65" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="44.60,34.15" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="48.30,54.45" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="44.00,22.25" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="37.30,22.50" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="46.30,43.35" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="36.60,34.35" z_order="0">
+    </points>
+  </image>
+  <image id="139" name="Cone_96.jpg" width="80" height="80">
+    <points label="K3" occluded="0" source="manual" points="35.90,29.45" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="46.60,49.55" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="44.90,40.75" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="33.50,41.15" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="44.30,21.25" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="43.70,29.95" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="37.80,21.55" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="31.60,47.95" z_order="0">
+    </points>
+  </image>
+  <image id="138" name="Cone_95.jpg" width="80" height="80">
+    <points label="K1" occluded="0" source="manual" points="30.20,52.85" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="39.00,19.95" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="45.70,20.05" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="33.80,42.65" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="46.20,32.15" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="49.70,53.75" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="36.00,32.25" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="47.80,42.65" z_order="0">
+    </points>
+  </image>
+  <image id="137" name="Cone_94.jpg" width="80" height="80">
+    <points label="K2" occluded="0" source="manual" points="34.60,40.35" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="36.90,30.95" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="44.20,32.45" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="44.40,24.05" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="44.50,48.15" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="44.40,41.45" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="32.30,45.95" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="39.30,23.05" z_order="0">
+    </points>
+  </image>
+  <image id="136" name="Cone_93.jpg" width="80" height="80">
+    <points label="K1" occluded="0" source="manual" points="31.30,51.95" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="39.80,23.55" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="45.80,43.45" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="45.40,34.55" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="45.20,23.75" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="36.90,33.75" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="34.10,42.75" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="46.40,53.65" z_order="0">
+    </points>
+  </image>
+  <image id="135" name="Cone_92.jpg" width="80" height="80">
+    <points label="K4" occluded="0" source="manual" points="39.40,35.70" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="43.80,45.65" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="37.90,40.95" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="42.90,35.75" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="43.20,41.05" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="44.20,50.25" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="36.80,45.85" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="35.80,50.35" z_order="0">
+    </points>
+  </image>
+  <image id="134" name="Cone_91.jpg" width="80" height="80">
+  </image>
+  <image id="133" name="Cone_90.jpg" width="80" height="80">
+  </image>
+  <image id="132" name="Cone_9.jpg" width="80" height="80">
+    <points label="K4" occluded="0" source="manual" points="37.90,14.35" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="27.50,56.15" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="31.60,42.25" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="34.10,30.55" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="47.40,30.75" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="45.90,14.05" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="51.40,56.95" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="49.50,43.95" z_order="0">
+    </points>
+  </image>
+  <image id="131" name="Cone_89.jpg" width="80" height="80">
+    <points label="K5" occluded="0" source="manual" points="41.30,25.25" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="33.60,43.75" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="46.60,52.35" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="34.90,35.45" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="42.00,35.15" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="44.00,42.85" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="32.50,52.65" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="35.90,25.65" z_order="0">
+    </points>
+  </image>
+  <image id="130" name="Cone_88.jpg" width="80" height="80">
+    <points label="K1" occluded="0" source="manual" points="30.30,53.45" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="36.00,22.85" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="32.20,43.75" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="46.10,43.50" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="42.10,22.15" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="43.60,34.15" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="33.80,34.25" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="48.10,54.25" z_order="0">
+    </points>
+  </image>
+  <image id="129" name="Cone_87.jpg" width="80" height="80">
+  </image>
+  <image id="128" name="Cone_86.jpg" width="80" height="80">
+  </image>
+  <image id="127" name="Cone_85.jpg" width="80" height="80">
+    <points label="K3" occluded="0" source="manual" points="37.40,39.05" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="41.30,33.25" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="42.50,43.75" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="43.20,48.65" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="41.40,39.25" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="36.40,44.15" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="38.30,33.35" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="36.00,48.65" z_order="0">
+    </points>
+  </image>
+  <image id="126" name="Cone_84.jpg" width="80" height="80">
+    <points label="K4" occluded="0" source="manual" points="35.70,24.25" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="31.30,52.85" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="41.60,23.75" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="43.10,33.95" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="45.00,42.95" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="33.20,43.35" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="34.80,33.95" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="47.80,53.35" z_order="0">
+    </points>
+  </image>
+  <image id="125" name="Cone_83.jpg" width="80" height="80">
+    <points label="K3" occluded="0" source="manual" points="35.60,35.05" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="44.30,35.30" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="43.70,25.25" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="46.40,53.15" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="33.70,43.35" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="44.90,43.85" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="31.60,52.25" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="37.70,25.15" z_order="0">
+    </points>
+  </image>
+  <image id="124" name="Cone_82.jpg" width="80" height="80">
+    <points label="K1" occluded="0" source="manual" points="35.00,47.15" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="37.80,31.85" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="42.20,47.15" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="41.80,41.75" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="37.00,37.05" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="36.00,42.15" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="41.40,37.45" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="41.30,31.45" z_order="0">
+    </points>
+  </image>
+  <image id="123" name="Cone_81.jpg" width="80" height="80">
+    <points label="K5" occluded="0" source="manual" points="40.70,25.75" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="42.80,46.35" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="34.70,31.25" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="40.90,31.85" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="41.60,39.85" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="33.60,39.65" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="36.40,25.75" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="32.40,45.45" z_order="0">
+    </points>
+  </image>
+  <image id="122" name="Cone_80.jpg" width="80" height="80">
+    <points label="K4" occluded="0" source="manual" points="38.00,24.95" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="32.60,52.65" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="44.40,24.70" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="45.90,43.85" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="35.40,44.15" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="36.60,35.45" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="44.80,35.15" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="48.40,53.65" z_order="0">
+    </points>
+  </image>
+  <image id="121" name="Cone_8.jpg" width="80" height="80">
+    <points label="K5" occluded="0" source="manual" points="42.20,32.75" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="43.00,49.85" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="42.50,38.05" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="37.30,37.55" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="38.60,32.70" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="42.60,43.45" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="35.40,43.05" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="33.90,49.15" z_order="0">
+    </points>
+  </image>
+  <image id="120" name="Cone_79.jpg" width="80" height="80">
+    <points label="K8" occluded="0" source="manual" points="46.70,55.05" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="34.30,44.25" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="36.90,35.55" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="44.30,35.95" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="44.50,44.55" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="31.30,53.15" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="38.20,26.15" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="44.10,26.30" z_order="0">
+    </points>
+  </image>
+  <image id="119" name="Cone_78.jpg" width="80" height="80">
+    <points label="K1" occluded="0" source="manual" points="31.20,64.25" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="38.40,36.65" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="44.40,46.95" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="36.70,46.45" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="45.10,37.05" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="34.20,55.35" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="46.20,66.25" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="44.70,55.55" z_order="0">
+    </points>
+  </image>
+  <image id="118" name="Cone_77.jpg" width="80" height="80">
+  </image>
+  <image id="117" name="Cone_76.jpg" width="80" height="80">
+  </image>
+  <image id="116" name="Cone_75.jpg" width="80" height="80">
+    <points label="K7" occluded="0" source="manual" points="42.20,40.85" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="42.20,29.35" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="43.50,46.95" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="36.00,40.05" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="42.20,35.15" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="37.10,34.65" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="38.20,29.05" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="34.10,45.85" z_order="0">
+    </points>
+  </image>
+  <image id="115" name="Cone_74.jpg" width="80" height="80">
+    <points label="K2" occluded="0" source="manual" points="35.90,40.45" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="34.00,45.95" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="38.30,28.45" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="42.50,28.65" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="37.20,34.70" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="42.20,41.05" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="43.00,47.55" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="42.30,34.95" z_order="0">
+    </points>
+  </image>
+  <image id="114" name="Cone_73.jpg" width="80" height="80">
+    <points label="K6" occluded="0" source="manual" points="54.40,25.25" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="53.60,65.95" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="53.90,46.05" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="31.50,41.75" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="56.00,5.65" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="38.50,21.95" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="24.50,60.00" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="44.80,4.05" z_order="0">
+    </points>
+  </image>
+  <image id="113" name="Cone_72.jpg" width="80" height="80">
+  </image>
+  <image id="112" name="Cone_71.jpg" width="80" height="80">
+    <points label="K3" occluded="0" source="manual" points="35.70,27.85" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="30.20,55.85" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="39.60,16.40" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="51.00,43.95" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="32.80,42.65" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="48.70,29.35" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="48.30,16.70" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="51.90,57.65" z_order="0">
+    </points>
+  </image>
+  <image id="111" name="Cone_70.jpg" width="80" height="80">
+  </image>
+  <image id="110" name="Cone_7.jpg" width="80" height="80">
+    <points label="K4" occluded="0" source="manual" points="37.60,33.15" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="34.80,49.85" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="41.30,33.05" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="41.60,39.25" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="35.70,44.55" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="42.70,44.25" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="43.30,50.15" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="36.70,39.05" z_order="0">
+    </points>
+  </image>
+  <image id="109" name="Cone_69.jpg" width="70" height="80">
+  </image>
+  <image id="108" name="Cone_68.jpg" width="80" height="80">
+  </image>
+  <image id="107" name="Cone_67.jpg" width="80" height="80">
+    <points label="K7" occluded="0" source="manual" points="46.10,42.95" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="33.00,42.05" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="44.80,22.05" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="45.80,31.35" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="47.00,52.15" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="36.00,30.35" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="30.80,50.35" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="38.50,21.65" z_order="0">
+    </points>
+  </image>
+  <image id="106" name="Cone_66.jpg" width="80" height="80">
+  </image>
+  <image id="105" name="Cone_65.jpg" width="80" height="80">
+    <points label="K3" occluded="0" source="manual" points="38.60,28.15" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="42.10,19.55" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="30.20,52.55" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="48.60,56.55" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="48.20,30.35" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="48.20,20.25" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="34.50,41.65" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="49.00,44.15" z_order="0">
+    </points>
+  </image>
+  <image id="104" name="Cone_64.jpg" width="80" height="80">
+  </image>
+  <image id="103" name="Cone_63.jpg" width="80" height="80">
+    <points label="K1" occluded="0" source="manual" points="33.20,46.55" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="39.90,25.85" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="44.50,41.35" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="35.40,39.75" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="44.50,26.35" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="44.40,32.05" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="44.00,48.45" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="38.30,30.85" z_order="0">
+    </points>
+  </image>
+  <image id="102" name="Cone_62.jpg" width="80" height="80">
+    <points label="K5" occluded="0" source="manual" points="48.30,12.75" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="31.20,41.45" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="50.20,43.65" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="49.40,27.35" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="51.90,59.25" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="35.70,25.95" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="27.20,55.45" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="40.80,12.35" z_order="0">
+    </points>
+  </image>
+  <image id="101" name="Cone_61.jpg" width="80" height="80">
+    <points label="K3" occluded="0" source="manual" points="34.60,28.55" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="36.90,14.85" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="28.30,56.85" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="31.50,43.15" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="49.40,43.15" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="45.10,14.35" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="47.00,28.15" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="52.80,57.15" z_order="0">
+    </points>
+  </image>
+  <image id="100" name="Cone_60.jpg" width="80" height="80">
+  </image>
+  <image id="99" name="Cone_6.jpg" width="80" height="80">
+    <points label="K4" occluded="0" source="manual" points="38.70,11.70" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="26.00,56.20" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="46.40,12.15" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="50.60,59.05" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="49.10,42.85" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="31.00,41.65" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="47.70,28.65" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="34.70,27.65" z_order="0">
+    </points>
+  </image>
+  <image id="98" name="Cone_59.jpg" width="80" height="80">
+    <points label="K2" occluded="0" source="manual" points="35.30,39.95" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="43.40,40.15" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="44.10,47.55" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="41.20,26.25" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="42.50,32.25" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="36.60,32.35" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="37.80,26.30" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="33.60,47.00" z_order="0">
+    </points>
+  </image>
+  <image id="97" name="Cone_58.jpg" width="80" height="80">
+    <points label="K3" occluded="0" source="manual" points="35.00,38.95" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="38.70,25.15" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="49.10,57.15" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="50.90,72.15" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="47.80,40.25" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="26.80,68.15" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="30.60,54.45" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="47.60,25.35" z_order="0">
+    </points>
+  </image>
+  <image id="96" name="Cone_57.jpg" width="80" height="80">
+  </image>
+  <image id="95" name="Cone_56.jpg" width="47" height="80">
+  </image>
+  <image id="94" name="Cone_55.jpg" width="80" height="80">
+    <points label="K4" occluded="0" source="manual" points="37.90,24.95" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="32.30,51.45" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="45.00,32.55" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="46.50,43.05" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="33.60,42.45" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="44.30,24.65" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="47.10,51.55" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="36.10,32.65" z_order="0">
+    </points>
+  </image>
+  <image id="93" name="Cone_54.jpg" width="80" height="80">
+    <points label="K7" occluded="0" source="manual" points="44.80,43.15" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="34.20,43.15" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="42.50,33.35" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="45.70,51.55" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="41.40,24.55" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="32.90,52.15" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="35.70,33.65" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="36.80,24.75" z_order="0">
+    </points>
+  </image>
+  <image id="92" name="Cone_53.jpg" width="80" height="80">
+  </image>
+  <image id="91" name="Cone_52.jpg" width="80" height="80">
+  </image>
+  <image id="90" name="Cone_51.jpg" width="80" height="80">
+    <points label="K3" occluded="0" source="manual" points="36.20,30.75" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="38.30,21.95" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="33.00,40.95" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="45.90,22.05" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="46.80,52.35" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="46.10,41.75" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="46.00,31.25" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="30.80,50.75" z_order="0">
+    </points>
+  </image>
+  <image id="89" name="Cone_50.jpg" width="80" height="80">
+  </image>
+  <image id="88" name="Cone_5.jpg" width="80" height="80">
+    <points label="K7" occluded="0" source="manual" points="46.90,43.15" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="47.70,53.55" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="39.60,20.75" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="46.50,30.55" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="46.70,21.05" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="32.90,41.85" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="30.70,50.25" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="36.70,29.65" z_order="0">
+    </points>
+  </image>
+  <image id="87" name="Cone_49.jpg" width="80" height="80">
+    <points label="K1" occluded="0" source="manual" points="34.70,48.45" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="36.90,37.05" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="42.70,36.95" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="35.60,42.15" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="42.20,30.35" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="37.70,30.65" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="43.30,42.55" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="44.10,49.25" z_order="0">
+    </points>
+  </image>
+  <image id="86" name="Cone_48.jpg" width="80" height="80">
+    <points label="K4" occluded="0" source="manual" points="36.40,24.45" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="43.10,32.55" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="33.80,42.75" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="46.70,50.55" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="42.10,24.25" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="45.90,41.95" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="35.10,32.75" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="32.40,50.25" z_order="0">
+    </points>
+  </image>
+  <image id="85" name="Cone_47.jpg" width="80" height="80">
+    <points label="K3" occluded="0" source="manual" points="36.70,36.95" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="33.40,48.65" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="38.30,30.65" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="42.90,43.05" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="42.60,37.65" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="43.10,30.95" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="43.20,49.65" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="35.40,42.55" z_order="0">
+    </points>
+  </image>
+  <image id="84" name="Cone_46.jpg" width="80" height="80">
+  </image>
+  <image id="83" name="Cone_45.jpg" width="80" height="80">
+    <points label="K7" occluded="0" source="manual" points="44.90,41.85" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="45.70,49.35" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="43.50,24.30" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="33.90,41.15" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="44.10,32.15" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="38.30,24.15" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="31.50,48.35" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="36.50,31.55" z_order="0">
+    </points>
+  </image>
+  <image id="82" name="Cone_44.jpg" width="80" height="80">
+  </image>
+  <image id="81" name="Cone_43.jpg" width="80" height="80">
+    <points label="K5" occluded="0" source="manual" points="42.70,29.70" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="33.60,47.95" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="36.80,35.85" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="38.50,28.95" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="42.80,49.65" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="42.50,36.45" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="35.70,41.35" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="43.00,42.65" z_order="0">
+    </points>
+  </image>
+  <image id="80" name="Cone_42.jpg" width="80" height="80">
+  </image>
+  <image id="79" name="Cone_41.jpg" width="80" height="80">
+  </image>
+  <image id="78" name="Cone_40.jpg" width="49" height="80">
+    <points label="K1" occluded="0" source="manual" points="34.20,48.35" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="38.70,36.65" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="40.50,29.95" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="42.90,43.55" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="43.10,37.55" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="37.10,42.05" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="42.80,50.15" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="43.40,30.75" z_order="0">
+    </points>
+  </image>
+  <image id="77" name="Cone_4.jpg" width="80" height="80">
+    <points label="K7" occluded="0" source="manual" points="50.10,42.45" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="31.40,2.25" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="45.20,23.85" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="56.10,63.75" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="26.20,43.35" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="42.00,1.45" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="22.40,64.35" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="28.40,24.85" z_order="0">
+    </points>
+  </image>
+  <image id="76" name="Cone_39.jpg" width="80" height="80">
+    <points label="K5" occluded="0" source="manual" points="40.70,0.15" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="20.50,66.75" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="25.20,20.75" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="58.40,63.95" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="26.90,0.35" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="23.30,45.85" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="52.20,43.45" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="44.80,18.75" z_order="0">
+    </points>
+  </image>
+  <image id="75" name="Cone_38.jpg" width="80" height="80">
+    <points label="K1" occluded="0" source="manual" points="21.70,63.35" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="32.50,22.75" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="36.60,2.25" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="50.30,24.65" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="27.70,43.45" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="55.30,65.85" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="52.90,46.25" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="49.70,2.95" z_order="0">
+    </points>
+  </image>
+  <image id="74" name="Cone_37.jpg" width="80" height="80">
+    <points label="K8" occluded="0" source="manual" points="42.20,51.75" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="40.40,39.45" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="41.30,45.15" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="35.70,32.55" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="33.70,45.15" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="40.00,32.45" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="34.80,39.15" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="32.10,51.65" z_order="0">
+    </points>
+  </image>
+  <image id="73" name="Cone_36.jpg" width="80" height="80">
+    <points label="K5" occluded="0" source="manual" points="42.10,27.85" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="36.60,35.45" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="33.90,49.05" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="37.50,28.05" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="44.00,41.85" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="42.90,35.35" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="45.10,49.25" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="35.40,41.85" z_order="0">
+    </points>
+  </image>
+  <image id="72" name="Cone_35.jpg" width="80" height="80">
+    <points label="K1" occluded="0" source="manual" points="34.40,48.20" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="36.20,32.95" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="37.60,26.05" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="43.30,32.85" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="45.10,47.95" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="44.30,41.00" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="35.40,41.35" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="42.50,25.85" z_order="0">
+    </points>
+  </image>
+  <image id="71" name="Cone_34.jpg" width="80" height="80">
+  </image>
+  <image id="70" name="Cone_33.jpg" width="57" height="80">
+  </image>
+  <image id="69" name="Cone_32.jpg" width="80" height="80">
+  </image>
+  <image id="68" name="Cone_31.jpg" width="80" height="80">
+    <points label="K6" occluded="0" source="manual" points="50.30,21.05" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="33.50,0.35" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="53.90,42.25" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="59.10,64.65" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="24.80,42.85" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="47.30,0.05" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="20.80,67.75" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="29.10,20.75" z_order="0">
+    </points>
+  </image>
+  <image id="67" name="Cone_30.jpg" width="80" height="80">
+    <points label="K5" occluded="0" source="manual" points="44.90,26.65" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="36.90,41.95" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="45.80,49.15" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="38.80,32.75" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="34.70,48.65" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="40.50,26.65" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="45.70,42.35" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="45.50,33.45" z_order="0">
+    </points>
+  </image>
+  <image id="66" name="Cone_3.jpg" width="80" height="80">
+    <points label="K1" occluded="0" source="manual" points="34.80,53.25" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="36.70,40.65" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="43.70,46.25" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="43.00,40.05" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="37.50,33.35" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="35.90,46.55" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="44.40,52.75" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="42.50,32.95" z_order="0">
+    </points>
+  </image>
+  <image id="65" name="Cone_29.jpg" width="80" height="80">
+    <points label="K6" occluded="0" source="manual" points="43.30,35.75" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="38.60,27.35" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="43.20,42.35" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="35.40,42.15" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="43.80,27.75" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="43.40,50.45" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="32.10,50.05" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="37.40,34.65" z_order="0">
+    </points>
+  </image>
+  <image id="64" name="Cone_28.jpg" width="80" height="80">
+    <points label="K2" occluded="0" source="manual" points="35.40,42.15" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="43.10,51.65" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="42.30,29.85" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="32.00,50.15" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="37.10,36.35" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="38.40,29.45" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="42.00,37.35" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="42.30,43.25" z_order="0">
+    </points>
+  </image>
+  <image id="63" name="Cone_27.jpg" width="80" height="80">
+    <points label="K1" occluded="0" source="manual" points="33.10,47.85" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="37.40,32.95" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="44.50,33.25" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="38.70,25.55" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="45.30,48.85" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="45.10,42.25" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="35.30,41.55" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="44.00,25.55" z_order="0">
+    </points>
+  </image>
+  <image id="62" name="Cone_26.jpg" width="80" height="80">
+  </image>
+  <image id="61" name="Cone_25.jpg" width="80" height="80">
+    <points label="K4" occluded="0" source="manual" points="41.20,23.25" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="46.90,34.85" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="46.90,23.65" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="47.20,44.25" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="47.70,55.35" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="38.80,33.25" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="36.00,42.55" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="33.00,51.95" z_order="0">
+    </points>
+  </image>
+  <image id="60" name="Cone_24.jpg" width="80" height="80">
+    <points label="K8" occluded="0" source="manual" points="47.30,50.95" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="46.80,41.35" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="46.40,22.45" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="38.20,30.75" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="34.00,48.65" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="35.50,40.65" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="40.50,22.25" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="46.40,31.55" z_order="0">
+    </points>
+  </image>
+  <image id="59" name="Cone_23.jpg" width="80" height="80">
+    <points label="K1" occluded="0" source="manual" points="23.90,61.05" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="33.10,39.45" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="57.00,23.85" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="47.10,0.25" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="40.80,20.25" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="59.60,1.25" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="55.60,44.85" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="55.30,68.05" z_order="0">
+    </points>
+  </image>
+  <image id="58" name="Cone_22.jpg" width="80" height="80">
+  </image>
+  <image id="57" name="Cone_21.jpg" width="80" height="80">
+    <points label="K6" occluded="0" source="manual" points="51.90,30.85" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="42.40,12.15" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="51.60,12.85" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="52.80,45.75" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="55.80,61.15" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="38.20,29.45" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="33.60,43.55" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="29.60,56.95" z_order="0">
+    </points>
+  </image>
+  <image id="56" name="Cone_20.jpg" width="52" height="80">
+  </image>
+  <image id="55" name="Cone_2.jpg" width="80" height="80">
+    <points label="K5" occluded="0" source="manual" points="42.10,28.50" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="44.20,47.55" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="43.70,41.05" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="37.00,34.45" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="36.20,40.95" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="43.00,34.75" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="38.10,28.55" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="35.00,46.95" z_order="0">
+    </points>
+  </image>
+  <image id="54" name="Cone_19.jpg" width="80" height="80">
+    <points label="K1" occluded="0" source="manual" points="30.30,56.15" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="34.10,43.70" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="36.80,33.80" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="46.70,21.20" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="38.90,21.30" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="47.70,34.25" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="50.80,57.45" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="48.80,45.45" z_order="0">
+    </points>
+  </image>
+  <image id="53" name="Cone_18.jpg" width="80" height="80">
+    <points label="K6" occluded="0" source="manual" points="51.90,30.75" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="43.10,11.85" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="29.30,55.45" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="51.10,12.55" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="38.20,27.65" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="53.00,61.65" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="51.90,45.35" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="33.60,41.65" z_order="0">
+    </points>
+  </image>
+  <image id="52" name="Cone_17.jpg" width="80" height="80">
+    <points label="K7" occluded="0" source="manual" points="47.80,42.45" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="48.60,57.05" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="39.20,28.55" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="35.50,39.95" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="31.00,52.45" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="43.00,16.45" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="48.70,30.65" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="49.60,17.65" z_order="0">
+    </points>
+  </image>
+  <image id="51" name="Cone_16.jpg" width="80" height="80">
+    <points label="K2" occluded="0" source="manual" points="33.50,43.75" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="37.50,20.45" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="30.30,55.35" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="45.90,33.35" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="44.80,19.95" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="50.20,55.95" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="36.10,33.05" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="47.50,44.25" z_order="0">
+    </points>
+  </image>
+  <image id="50" name="Cone_15.jpg" width="80" height="80">
+    <points label="K1" occluded="0" source="manual" points="28.70,55.45" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="45.10,32.35" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="37.20,18.25" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="44.30,18.05" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="49.00,57.05" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="47.20,44.15" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="34.80,32.05" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="32.30,43.45" z_order="0">
+    </points>
+  </image>
+  <image id="49" name="Cone_142.jpg" width="80" height="80">
+    <points label="K7" occluded="0" source="manual" points="46.90,43.15" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="36.50,32.15" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="48.50,52.15" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="34.80,42.65" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="32.60,52.05" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="45.10,32.15" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="38.10,22.55" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="44.10,22.65" z_order="0">
+    </points>
+  </image>
+  <image id="48" name="Cone_141.jpg" width="80" height="80">
+    <points label="K2" occluded="0" source="manual" points="35.00,41.55" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="37.20,23.05" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="33.80,51.35" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="43.60,32.05" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="42.30,22.75" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="45.10,41.05" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="36.30,32.25" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="47.30,50.05" z_order="0">
+    </points>
+  </image>
+  <image id="47" name="Cone_140.jpg" width="80" height="80">
+    <points label="K6" occluded="0" source="manual" points="46.30,31.45" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="39.10,22.05" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="45.40,21.45" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="31.90,50.05" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="48.60,51.95" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="47.60,41.85" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="37.50,30.95" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="34.70,41.05" z_order="0">
+    </points>
+  </image>
+  <image id="46" name="Cone_14.jpg" width="80" height="80">
+    <points label="K7" occluded="0" source="manual" points="43.60,42.15" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="37.10,34.65" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="44.80,49.75" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="35.40,41.55" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="38.60,27.75" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="43.40,35.05" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="33.50,48.75" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="43.10,27.95" z_order="0">
+    </points>
+  </image>
+  <image id="45" name="Cone_139.jpg" width="80" height="80">
+  </image>
+  <image id="44" name="Cone_138.jpg" width="80" height="80">
+    <points label="K2" occluded="0" source="manual" points="34.70,42.35" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="31.10,52.50" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="46.50,34.75" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="46.90,21.85" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="40.40,20.95" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="46.80,45.45" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="47.80,57.70" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="38.10,32.30" z_order="0">
+    </points>
+  </image>
+  <image id="43" name="Cone_137.jpg" width="80" height="80">
+  </image>
+  <image id="42" name="Cone_136.jpg" width="80" height="80">
+    <points label="K6" occluded="0" source="manual" points="42.20,39.95" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="42.70,33.45" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="38.00,33.15" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="33.80,50.75" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="43.50,51.70" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="42.70,45.35" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="36.80,38.95" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="35.20,44.85" z_order="0">
+    </points>
+  </image>
+  <image id="41" name="Cone_135.jpg" width="80" height="80">
+    <points label="K8" occluded="0" source="manual" points="43.80,49.35" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="42.80,42.65" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="36.60,37.45" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="35.40,42.65" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="37.60,31.05" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="42.40,37.75" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="34.20,48.85" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="42.00,31.05" z_order="0">
+    </points>
+  </image>
+  <image id="40" name="Cone_134.jpg" width="80" height="80">
+    <points label="K2" occluded="0" source="manual" points="34.50,41.95" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="41.40,24.70" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="36.10,25.15" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="42.80,32.45" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="33.80,49.65" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="44.60,41.75" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="46.80,48.35" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="35.50,32.35" z_order="0">
+    </points>
+  </image>
+  <image id="39" name="Cone_133.jpg" width="80" height="80">
+  </image>
+  <image id="38" name="Cone_132.jpg" width="80" height="80">
+    <points label="K6" occluded="0" source="manual" points="48.10,26.75" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="47.60,9.05" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="26.30,57.95" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="37.80,8.65" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="34.10,25.65" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="50.40,44.45" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="52.40,60.15" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="29.90,43.05" z_order="0">
+    </points>
+  </image>
+  <image id="37" name="Cone_131.jpg" width="80" height="80">
+    <points label="K3" occluded="0" source="manual" points="37.60,29.45" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="48.70,61.05" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="48.20,45.15" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="33.50,41.95" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="48.40,32.05" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="28.50,54.65" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="48.30,15.25" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="41.60,14.25" z_order="0">
+    </points>
+  </image>
+  <image id="36" name="Cone_130.jpg" width="80" height="80">
+    <points label="K2" occluded="0" source="manual" points="34.90,41.35" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="33.10,47.75" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="43.10,33.65" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="42.50,28.10" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="37.90,27.95" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="36.40,33.05" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="44.00,48.05" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="43.70,41.65" z_order="0">
+    </points>
+  </image>
+  <image id="35" name="Cone_13.jpg" width="80" height="80">
+    <points label="K4" occluded="0" source="manual" points="36.00,31.20" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="42.20,31.55" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="43.00,46.35" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="26.40,69.65" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="45.40,57.85" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="47.80,71.35" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="32.60,45.75" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="30.30,57.65" z_order="0">
+    </points>
+  </image>
+  <image id="34" name="Cone_129.jpg" width="80" height="80">
+  </image>
+  <image id="33" name="Cone_128.jpg" width="80" height="80">
+    <points label="K8" occluded="0" source="manual" points="42.70,47.35" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="38.30,35.75" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="43.20,41.45" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="37.20,40.55" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="35.20,45.95" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="42.80,29.75" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="43.20,35.65" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="39.60,29.65" z_order="0">
+    </points>
+  </image>
+  <image id="32" name="Cone_127.jpg" width="80" height="80">
+    <points label="K7" occluded="0" source="manual" points="46.60,43.15" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="33.60,42.45" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="30.50,53.45" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="39.30,18.95" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="46.30,33.35" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="46.20,19.75" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="36.30,31.85" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="48.00,56.75" z_order="0">
+    </points>
+  </image>
+  <image id="31" name="Cone_126.jpg" width="80" height="80">
+    <points label="K5" occluded="0" source="manual" points="45.30,15.65" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="29.10,55.45" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="37.00,16.25" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="47.00,29.75" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="34.20,29.75" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="50.40,56.65" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="49.20,43.45" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="32.50,43.95" z_order="0">
+    </points>
+  </image>
+  <image id="30" name="Cone_125.jpg" width="80" height="80">
+    <points label="K8" occluded="0" source="manual" points="45.80,55.55" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="37.00,35.45" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="44.80,44.35" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="35.20,43.45" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="44.40,26.05" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="32.20,53.15" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="38.80,25.65" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="44.10,36.25" z_order="0">
+    </points>
+  </image>
+  <image id="29" name="Cone_124.jpg" width="80" height="80">
+    <points label="K7" occluded="0" source="manual" points="48.80,41.25" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="31.00,42.95" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="42.80,12.15" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="28.40,57.25" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="45.50,26.95" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="33.30,12.85" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="32.20,27.65" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="51.90,55.65" z_order="0">
+    </points>
+  </image>
+  <image id="28" name="Cone_123.jpg" width="80" height="80">
+    <points label="K4" occluded="0" source="manual" points="36.10,32.45" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="40.70,32.45" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="41.30,38.75" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="34.20,49.75" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="42.60,50.15" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="35.80,38.85" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="34.90,44.05" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="41.80,43.85" z_order="0">
+    </points>
+  </image>
+  <image id="27" name="Cone_122.jpg" width="80" height="80">
+  </image>
+  <image id="26" name="Cone_121.jpg" width="80" height="80">
+    <points label="K3" occluded="0" source="manual" points="29.80,24.25" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="54.80,59.65" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="47.20,40.95" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="29.70,43.05" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="28.30,61.95" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="43.20,22.70" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="38.70,5.35" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="30.30,6.35" z_order="0">
+    </points>
+  </image>
+  <image id="25" name="Cone_120.jpg" width="80" height="80">
+    <points label="K7" occluded="0" source="manual" points="54.80,44.75" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="31.90,40.95" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="55.10,3.25" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="54.90,26.25" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="44.90,2.05" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="25.10,59.75" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="38.40,22.25" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="55.80,64.55" z_order="0">
+    </points>
+  </image>
+  <image id="24" name="Cone_12.jpg" width="80" height="80">
+    <points label="K6" occluded="0" source="manual" points="43.90,36.25" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="34.40,49.45" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="43.70,29.05" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="39.00,28.65" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="38.00,36.05" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="44.70,50.35" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="36.30,41.95" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="43.90,42.45" z_order="0">
+    </points>
+  </image>
+  <image id="23" name="Cone_119.jpg" width="80" height="80">
+    <points label="K8" occluded="0" source="manual" points="54.80,60.95" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="33.70,26.75" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="30.00,42.55" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="51.90,42.95" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="25.00,61.05" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="37.20,6.25" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="50.50,27.55" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="47.80,6.65" z_order="0">
+    </points>
+  </image>
+  <image id="22" name="Cone_118.jpg" width="80" height="80">
+    <points label="K7" occluded="0" source="manual" points="41.90,43.85" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="35.50,42.55" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="41.70,37.95" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="33.10,48.85" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="42.20,32.05" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="38.20,31.00" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="37.20,37.65" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="41.60,49.95" z_order="0">
+    </points>
+  </image>
+  <image id="21" name="Cone_117.jpg" width="80" height="80">
+    <points label="K1" occluded="0" source="manual" points="32.60,49.55" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="43.10,37.35" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="42.80,29.25" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="38.10,29.05" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="43.60,50.85" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="36.70,36.35" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="35.30,41.95" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="43.10,43.15" z_order="0">
+    </points>
+  </image>
+  <image id="20" name="Cone_116.jpg" width="80" height="80">
+    <points label="K8" occluded="0" source="manual" points="46.40,47.20" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="38.50,32.75" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="37.20,39.95" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="45.90,40.45" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="45.40,33.15" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="44.80,26.00" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="35.40,46.15" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="40.20,26.25" z_order="0">
+    </points>
+  </image>
+  <image id="19" name="Cone_115.jpg" width="80" height="80">
+    <points label="K2" occluded="0" source="manual" points="35.80,40.95" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="33.80,47.25" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="45.00,41.75" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="39.30,26.85" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="43.90,26.90" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="44.30,34.45" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="44.90,48.50" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="37.50,33.75" z_order="0">
+    </points>
+  </image>
+  <image id="18" name="Cone_114.jpg" width="80" height="80">
+  </image>
+  <image id="17" name="Cone_113.jpg" width="80" height="80">
+    <points label="K5" occluded="0" source="manual" points="46.50,23.85" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="40.30,23.05" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="46.80,54.95" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="31.40,51.00" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="46.40,34.75" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="38.20,33.05" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="46.00,44.05" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="36.00,41.95" z_order="0">
+    </points>
+  </image>
+  <image id="16" name="Cone_112.jpg" width="80" height="80">
+    <points label="K7" occluded="0" source="manual" points="46.70,41.25" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="33.70,48.55" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="35.60,40.45" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="37.40,30.75" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="47.10,50.55" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="45.40,22.35" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="45.70,31.25" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="39.10,22.05" z_order="0">
+    </points>
+  </image>
+  <image id="15" name="Cone_111.jpg" width="80" height="80">
+  </image>
+  <image id="14" name="Cone_110.jpg" width="80" height="80">
+    <points label="K4" occluded="0" source="manual" points="49.20,0.65" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="60.60,0.45" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="59.00,23.25" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="58.10,66.75" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="25.00,58.85" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="42.00,19.00" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="57.50,43.25" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="34.40,37.15" z_order="0">
+    </points>
+  </image>
+  <image id="13" name="Cone_11.jpg" width="80" height="80">
+    <points label="K7" occluded="0" source="manual" points="49.40,43.85" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="27.10,54.05" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="32.00,41.35" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="49.90,59.75" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="49.70,28.25" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="43.00,10.20" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="36.70,24.30" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="49.70,11.25" z_order="0">
+    </points>
+  </image>
+  <image id="12" name="Cone_109.jpg" width="80" height="80">
+  </image>
+  <image id="11" name="Cone_108.jpg" width="80" height="80">
+    <points label="K1" occluded="0" source="manual" points="29.80,56.35" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="38.70,29.95" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="56.00,61.45" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="52.50,13.45" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="43.10,12.55" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="52.10,30.85" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="35.10,42.65" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="52.80,45.75" z_order="0">
+    </points>
+  </image>
+  <image id="10" name="Cone_107.jpg" width="80" height="80">
+    <points label="K5" occluded="0" source="manual" points="45.30,21.05" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="33.80,42.45" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="46.30,33.45" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="48.70,54.55" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="38.50,20.55" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="31.40,53.15" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="47.40,43.35" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="36.10,32.65" z_order="0">
+    </points>
+  </image>
+  <image id="9" name="Cone_106.jpg" width="80" height="80">
+    <points label="K1" occluded="0" source="manual" points="29.00,54.15" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="49.80,44.65" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="37.30,29.05" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="49.00,13.95" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="33.50,41.15" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="50.40,59.05" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="49.90,31.25" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="41.50,12.95" z_order="0">
+    </points>
+  </image>
+  <image id="8" name="Cone_105.jpg" width="80" height="80">
+    <points label="K3" occluded="0" source="manual" points="38.20,29.25" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="47.60,17.65" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="35.80,39.35" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="47.80,56.15" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="41.70,16.75" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="47.70,31.65" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="47.70,42.55" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="31.20,51.45" z_order="0">
+    </points>
+  </image>
+  <image id="7" name="Cone_104.jpg" width="80" height="80">
+    <points label="K2" occluded="0" source="manual" points="35.90,41.95" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="40.30,24.45" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="45.90,52.75" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="46.00,35.95" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="45.90,43.75" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="32.30,49.85" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="46.00,25.55" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="38.10,35.05" z_order="0">
+    </points>
+  </image>
+  <image id="6" name="Cone_103.jpg" width="80" height="80">
+    <points label="K1" occluded="0" source="manual" points="32.00,52.55" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="45.90,43.65" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="44.10,25.75" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="36.30,35.05" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="44.60,35.15" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="47.50,53.25" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="34.50,43.65" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="37.90,25.35" z_order="0">
+    </points>
+  </image>
+  <image id="5" name="Cone_102.jpg" width="80" height="80">
+    <points label="K5" occluded="0" source="manual" points="43.70,24.05" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="36.10,35.55" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="33.60,43.95" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="47.20,55.25" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="37.40,24.05" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="44.60,35.85" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="29.80,54.65" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="45.50,44.75" z_order="0">
+    </points>
+  </image>
+  <image id="4" name="Cone_101.jpg" width="80" height="80">
+    <points label="K3" occluded="0" source="manual" points="37.90,35.65" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="44.00,49.15" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="43.30,36.35" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="38.80,29.25" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="35.90,41.45" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="33.70,47.65" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="43.40,42.35" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="42.70,29.35" z_order="0">
+    </points>
+  </image>
+  <image id="3" name="Cone_100.jpg" width="80" height="80">
+    <points label="K7" occluded="0" source="manual" points="44.20,41.95" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="39.10,35.95" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="35.80,47.45" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="44.00,30.15" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="39.50,30.05" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="37.70,41.55" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="44.80,48.25" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="44.00,36.25" z_order="0">
+    </points>
+  </image>
+  <image id="2" name="Cone_10.jpg" width="80" height="80">
+    <points label="K5" occluded="0" source="manual" points="43.60,12.75" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="47.30,28.65" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="51.90,56.15" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="30.70,42.05" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="35.90,13.15" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="49.10,41.95" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="28.70,55.45" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="32.80,28.85" z_order="0">
+    </points>
+  </image>
+  <image id="1" name="Cone_1.jpg" width="80" height="80">
+    <points label="K4" occluded="0" source="manual" points="38.20,28.55" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="43.30,45.25" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="35.90,40.05" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="42.40,33.95" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="34.70,44.95" z_order="0">
+    </points>
+    <points label="K7" occluded="0" source="manual" points="42.60,40.25" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="37.30,33.75" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="41.80,28.70" z_order="0">
+    </points>
+  </image>
+  <image id="0" name="Cone_0.jpg" width="80" height="80">
+    <points label="K7" occluded="0" source="manual" points="43.30,48.15" z_order="0">
+    </points>
+    <points label="K1" occluded="0" source="manual" points="34.70,54.65" z_order="0">
+    </points>
+    <points label="K3" occluded="0" source="manual" points="37.10,42.50" z_order="0">
+    </points>
+    <points label="K5" occluded="0" source="manual" points="42.40,36.00" z_order="0">
+    </points>
+    <points label="K2" occluded="0" source="manual" points="36.30,48.15" z_order="0">
+    </points>
+    <points label="K4" occluded="0" source="manual" points="37.80,36.25" z_order="0">
+    </points>
+    <points label="K8" occluded="0" source="manual" points="43.60,53.75" z_order="0">
+    </points>
+    <points label="K6" occluded="0" source="manual" points="43.30,42.25" z_order="0">
+    </points>
+  </image>
+</annotations>

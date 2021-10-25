@@ -1,7 +1,7 @@
 import torch
 
 # constant paths
-ROOT_PATH = '../input'
+ROOT_PATH = '../input/ConeKeypoints'
 OUTPUT_PATH = '../outputs'
 RESNET_MODEL = 'resnet18'
 
