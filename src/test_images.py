@@ -36,7 +36,7 @@ def InferFrame(model, frame, size=224):
 #model = KeypointResNet(pretrained=False, requires_grad=False).to(config.DEVICE)
 
 #model = KeypointEfficientNet(pretrained=False, requires_grad=False, model_name='efficientnet-b2')
-model = KeypointCustom(isPretrained=False, requires_grad=False)
+model = KeypointCustom(isPretrained=True, requires_grad=False)
 model = model.return_loaded_model().to(config.DEVICE)
 
 #checkpoint = torch.load('../weights/resnet18_30_epochs.pth', map_location=torch.device('cpu'))

@@ -2,6 +2,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import config
 import random
+import albumentations as A
+import torch
 
 def valid_keypoints_plot(image, outputs, orig_keypoints, epoch):
     """
@@ -39,18 +41,35 @@ def dataset_keypoints_plot(data):
     will be show just before training starts. Press `q` to quit the plot and
     start training.
     """
-
+    # transform = A.Compose(
+    #     [A.HorizontalFlip(p=1)],
+    #     keypoint_params=A.KeypointParams(format='xy')
+    # )
+    
     plt.figure(figsize=(10, 10))
-    for i in range(9):
+    for i in range(0, 16):
         sample = data[i]
         img = sample['image']
         img = np.array(img, dtype='float32')
         img = np.transpose(img, (1, 2, 0))
-        plt.subplot(3, 3, i+1)
-        plt.imshow(img)
+        
         keypoints = sample['keypoints']
+        #print(img.shape)
+        
+        
+        # transformed = transform(image=img, keypoints=keypoints)
+
+        # plt.subplot(2, 4, i+1)
+        # plt.imshow(transformed['image']) 
+
+        # for j in range(len(transformed['keypoints'])):
+        #     plt.plot(transformed['keypoints'][j][0], transformed['keypoints'][j][1], 'b.')
+
+        plt.subplot(4, 4, i+1)
+        plt.imshow(img)
+        
         for j in range(len(keypoints)):
-            plt.plot(keypoints[j, 0], keypoints[j, 1], 'b.')
-    
+            plt.plot(keypoints[j, 0], keypoints[j, 1], '.r')
+
     plt.show()
     plt.close()
