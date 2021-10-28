@@ -73,15 +73,18 @@ class KeypointEfficientNet():
 
 
 class KeypointCustom():
-    def __init__(self, isPretrained, requires_grad, model_name='tf_efficientnet_lite0'):
+    def __init__(self, isPretrained, requires_grad, fineTuning=False, model_name='tf_efficientnet_lite0'):
         # tf_efficientnetv2_s_in21ft1k
         self.model = timm.create_model(model_name, pretrained=isPretrained, num_classes=16)
 
         if requires_grad == True:
-            for name, param in self.model.named_parameters():
-                if 'classifier' not in name:
-                    param.requires_grad = False
-            print("Fine tuning....just training the last layer")
+            if fineTuning:
+                for name, param in self.model.named_parameters():
+                    if 'classifier' not in name:
+                        param.requires_grad = False
+                print("Fine tuning....just training the last layer")
+            else:
+                print("Training all layers.....")
 
         if requires_grad == False:
             for param in self.model.parameters():

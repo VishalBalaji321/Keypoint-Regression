@@ -23,7 +23,7 @@ class KeypointDataset(Dataset):
     def __init__(self, samples, path, augment=None):
         self.data = samples
         self.path = path
-        self.resize = 80
+        self.size = 80
         self.augment = augment
 
     def __len__(self):
@@ -39,6 +39,13 @@ class KeypointDataset(Dataset):
         # get the keypoints
         keypoints = self.data.iloc[index][1:]
         keypoints = np.array(keypoints, dtype="uint8")
+        
+        # Incase any keypoint lie on the borders of the image, just moving it by one pixel.
+        # This is done to prevent it from messing up the augmentation algorithms. :))
+        for index, value in enumerate(keypoints):
+            if value == self.size:
+                keypoints[index] = self.size - 1
+        
         # reshape the keypoints
         keypoints = keypoints.reshape(-1, 2)
     
@@ -99,6 +106,9 @@ valid_loader = DataLoader(valid_data,
 print(f"Training sample instances: {len(train_data)}")
 print(f"Validation sample instances: {len(valid_data)}")
 
+# for sample in train_data:
+#     img = sample['image']
+#     keypoint = sample['keypoints']
 # whether to show dataset keypoint plots
 if config.SHOW_DATASET_PLOT:
     utils.dataset_keypoints_plot(train_data)

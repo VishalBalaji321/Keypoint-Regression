@@ -61,7 +61,7 @@ models_to_evaluate = [
 ]
 
 #pprint(timm.list_models(pretrained=True))
-model = timm.create_model('efficientnet_b0', pretrained=False, num_classes=16)
+model = timm.create_model('resnet50d', pretrained=False, num_classes=16)
 pprint(model)
 
 for name, param in model.named_parameters():

@@ -45,8 +45,8 @@ def dataset_keypoints_plot(data):
     #     keypoint_params=A.KeypointParams(format='xy')
     # )
     
-    plt.figure(figsize=(10, 10))
-    for i in range(0, 16):
+    plt.figure(figsize=(20, 20))
+    for i in range(0, 40):
         sample = data[i]
         img = sample['image']
         img = np.array(img, dtype='float32')
@@ -64,7 +64,7 @@ def dataset_keypoints_plot(data):
         # for j in range(len(transformed['keypoints'])):
         #     plt.plot(transformed['keypoints'][j][0], transformed['keypoints'][j][1], 'b.')
 
-        plt.subplot(4, 4, i+1)
+        plt.subplot(8, 5, i+1)
         plt.imshow(img)
         
         for j in range(len(keypoints)):
