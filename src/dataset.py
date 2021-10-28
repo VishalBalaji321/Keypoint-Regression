@@ -42,7 +42,6 @@ class KeypointDataset(Dataset):
         # reshape the keypoints
         keypoints = keypoints.reshape(-1, 2)
     
-        
         # rescale keypoints according to image resize
         #keypoints = keypoints * [self.resize / orig_w, self.resize / orig_h]
         
@@ -50,8 +49,9 @@ class KeypointDataset(Dataset):
             transformed = self.augment(image=image, keypoints=keypoints)
             image = transformed["image"]
             keypoints = transformed["keypoints"]
-        else:
-            image = image / 255.0
+        
+        #Normalize the image
+        image = image / 255.0
 
         # transpose for getting the channel size to index 0
         image = np.transpose(image, (2, 0, 1))
@@ -67,7 +67,6 @@ class KeypointDataset(Dataset):
 
 
 Transform = A.Compose([
-    A.Normalize(always_apply=True, p=1),
     A.HorizontalFlip(),
     A.OneOf([
         A.MotionBlur(p=.2),
@@ -102,4 +101,4 @@ print(f"Validation sample instances: {len(valid_data)}")
 
 # whether to show dataset keypoint plots
 if config.SHOW_DATASET_PLOT:
-    utils.dataset_keypoints_plot(valid_data)
+    utils.dataset_keypoints_plot(train_data)

@@ -3,7 +3,6 @@ import numpy as np
 import config
 import random
 import albumentations as A
-import torch
 
 def valid_keypoints_plot(image, outputs, orig_keypoints, epoch):
     """
