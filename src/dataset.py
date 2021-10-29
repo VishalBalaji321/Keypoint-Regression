@@ -98,7 +98,7 @@ Transform = A.Compose([
         A.Blur(blur_limit=3, p=0.1),
     ], p=0.2),
     A.ShiftScaleRotate(shift_limit=0.0625, scale_limit=0.2, rotate_limit=30, p=0.2),
-    A.PiecewiseAffine(p=0.05),
+    A.PiecewiseAffine(p=0.2),
     A.OneOf([
         A.Sharpen(),
         A.Emboss(),

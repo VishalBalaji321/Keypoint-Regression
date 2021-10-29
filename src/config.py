@@ -1,8 +1,8 @@
 import torch
 
 # constant paths
-ROOT_PATH = '../input/ConeKeypoints'
-OUTPUT_PATH = '../outputs'
+ROOT_PATH = 'Keypoint-Regression/input/ConeKeypoints'
+OUTPUT_PATH = 'Keypoint-Regression/outputs'
 DEFAULT_MODEL = 'resnet18'
 
 IMG_SIZE = 80
