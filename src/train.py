@@ -6,9 +6,10 @@ import torch.nn as nn
 import matplotlib
 import config
 import utils
-import timm
+import time
+import statistics as s
 
-from model import KeypointResNet, KeypointEfficientNet, KeypointCustom
+from model import KeypointCustom
 from dataset import train_data, train_loader, valid_data, valid_loader
 from tqdm import tqdm
 
@@ -78,7 +79,7 @@ def validate(model, dataloader, data, epoch):
 # model 
 #model = KeypointResNet(pretrained=True, requires_grad=True, model_name=config.RESNET_MODEL).to(config.DEVICE)
 #model = KeypointEfficientNet(pretrained=True, requires_grad=True)
-model = KeypointCustom(isPretrained=True, requires_grad=True, model_name='mobilenetv3_large_100_miil_in21k')
+model = KeypointCustom(isPretrained=False, requires_grad=True, model_name='tf_efficientnet_lite0')
 model = model.return_loaded_model().to(config.DEVICE)
 
 # optimizer
@@ -91,10 +92,21 @@ criterion = nn.SmoothL1Loss()
 train_loss = []
 val_loss = []
 
+epoch_train_time = []
+val_time = []
+start_train = time.time()
 for epoch in range(config.EPOCHS):
     print(f"Epoch {epoch+1} of {config.EPOCHS}")
+    
+    start_epoch = time.time()
     train_epoch_loss = fit(model, train_loader, train_data)
+    end_epoch = time.time()
+    epoch_train_time.append(end_epoch - start_epoch)
+
     val_epoch_loss = validate(model, valid_loader, valid_data, epoch)
+    end_val = time.time()
+    val_time.append(end_val - end_epoch)
+
     train_loss.append(train_epoch_loss)
     val_loss.append(val_epoch_loss)
     print(f"Train Loss: {train_epoch_loss:.4f}")
@@ -106,7 +118,11 @@ for epoch in range(config.EPOCHS):
             'optimizer_state_dict': optimizer.state_dict(),
             'loss': criterion,
             }, f"{config.OUTPUT_PATH}/model_{epoch}.pth")
+end_train = time.time()
 
+print(f"Training Time: {end_train - start_train}")
+print(f"Average train time per epoch: {s.mean(epoch_train_time)}")
+print(f"Average inference time per image: {s.mean(val_time)}")
 # loss plots
 plt.figure(figsize=(10, 7))
 plt.plot(train_loss, color='orange', label='train loss')
@@ -114,6 +130,11 @@ plt.plot(val_loss, color='red', label='validataion loss')
 plt.xlabel('Epochs')
 plt.ylabel('Loss')
 plt.legend()
+plt.figtext(0.5, 0.01, f"Total training Time: {round(end_train - start_train, 2)}s", ha="center", fontsize=10)
+plt.figtext(0.5, 0.11, f"Average train time per epoch: {round(s.mean(epoch_train_time), 2)}s", ha="center", fontsize=10)
+plt.figtext(0.5, 0.21, f"Average inference time per image: {round(s.mean(val_time), 2)}s", ha="center", fontsize=10)
+
+
 plt.savefig(f"{config.OUTPUT_PATH}/loss.png")
 plt.show()
 torch.save({

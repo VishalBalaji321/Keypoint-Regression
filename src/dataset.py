@@ -42,13 +42,22 @@ class KeypointDataset(Dataset):
         
         # Incase any keypoint lie on the borders of the image, just moving it by one pixel.
         # This is done to prevent it from messing up the augmentation algorithms. :))
+        num_zeros = 0
         for index, value in enumerate(keypoints):
             if value == self.size:
-                keypoints[index] = self.size - 1
+              keypoints[index] = self.size - 1
+            if value == 0:
+              num_zeros += 1
+            if value < 0 or value > self.size:
+              value = np.nan
+        if num_zeros >= 2:
+          index += 1
+          return self.__getitem__(index)
         
         # reshape the keypoints
-        keypoints = keypoints.reshape(-1, 2)
-    
+        keypoints = keypoints.reshape(8, 2)
+        keypoints_initial = keypoints
+
         # rescale keypoints according to image resize
         #keypoints = keypoints * [self.resize / orig_w, self.resize / orig_h]
         
@@ -57,15 +66,24 @@ class KeypointDataset(Dataset):
             image = transformed["image"]
             keypoints = transformed["keypoints"]
         
+        keypoints_augment = keypoints
         #Normalize the image
         image = image / 255.0
 
         # transpose for getting the channel size to index 0
         image = np.transpose(image, (2, 0, 1))
 
+        image = torch.tensor(image, dtype=torch.float)
+        keypoint = torch.tensor(keypoints, dtype=torch.float)
+        
+        if not torch.equal(torch.Tensor([8, 2]), torch.Tensor(list(keypoint.shape))):
+          
+          print(f"Keypoints Initial: {keypoints_initial}")
+          print(f"Keypoints Augment: {keypoints_augment}")
+
         return {
-            'image': torch.tensor(image, dtype=torch.float),
-            'keypoints': torch.tensor(keypoints, dtype=torch.float),
+            'image': image,
+            'keypoints': keypoint,
         }
 
 # get the training and validation data samples
@@ -87,7 +105,7 @@ Transform = A.Compose([
     ], p=0.3),
     #A.RandomFog(p=0.3),
     ],
-    keypoint_params=A.KeypointParams(format='xy')
+    keypoint_params=A.KeypointParams(format='xy', remove_invisible=False)
 )
 
 
