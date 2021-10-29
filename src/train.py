@@ -23,6 +23,9 @@ def fit(model, dataloader, data, TrainMetrics):
     model.train()
     train_running_loss = 0.0
     train_acc = 0.0
+    train_prec = 0.0
+    train_recall = 0.0
+    train_f1 = 0.0
     
     # calculate the number of batches
     num_batches = int(len(data)/dataloader.batch_size)
@@ -54,29 +57,47 @@ def fit(model, dataloader, data, TrainMetrics):
         count_total += keypoints.size(0)
         train_acc += ((100 * (keypoints == outputs.round()).sum()) / count_total).item()
 
+        # Precision, Recall, F1_Score
+        tp = (keypoints * outputs.round()).sum().item()
+        fp = (keypoints * (1 - outputs.round())).sum().item()
+        fn = ((1 - keypoints) * outputs.round()).sum().item()
+
+        precision = tp / (tp + fp + 1e-7)
+        train_prec += precision
+        
+        recall = tp / (tp + fn + 1e-7)
+        train_recall += recall
+        
+        train_f1 += (2 * precision * recall) / (precision + recall)
+
+
+
         # Torchmetrics
-        TrainMetrics['accuracy'](outputs, keypoints)
-        TrainMetrics["area_under_curve"](outputs, keypoints)
-        TrainMetrics["precision"](outputs, keypoints)
-        TrainMetrics['recall'](outputs, keypoints)
-        TrainMetrics["f1_score"](outputs, keypoints)
+        # TrainMetrics['accuracy'](outputs, keypoints)
+        # TrainMetrics["area_under_curve"](outputs, keypoints)
+        # TrainMetrics["precision"](outputs, keypoints)
+        # TrainMetrics['recall'](outputs, keypoints)
+        # TrainMetrics["f1_score"](outputs, keypoints)
 
 
-    train_loss = train_running_loss/counter
+    train_loss = train_running_loss / counter
     train_acc = train_acc / counter
+    train_recall = train_recall / counter
+    train_prec = train_prec / counter
+    train_f1 = train_f1 / counter
 
     # Torchmetrics
-    train_acc = TrainMetrics['accuracy'].compute()
-    train_auc = TrainMetrics["area_under_curve"].compute()
-    train_prec = TrainMetrics["precision"].compute()
-    train_recall = TrainMetrics['recall'].compute()
-    train_f1 = TrainMetrics["f1_score"].compute()
+    # train_acc = TrainMetrics['accuracy'].compute()
+    # train_auc = TrainMetrics["area_under_curve"].compute()
+    # train_prec = TrainMetrics["precision"].compute()
+    # train_recall = TrainMetrics['recall'].compute()
+    # train_f1 = TrainMetrics["f1_score"].compute()
 
-    print(f"Accuracy: {train_acc}, AUC: {train_auc}, Precision: {train_prec}, Recall: {train_recall}, F1 Score: {train_f1}")
+    print(f"Accuracy: {train_acc}, Precision: {train_prec}, Recall: {train_recall}, F1 Score: {train_f1}")
     
     # Reset the torchmetrics
-    for keys in TrainMetrics:
-        TrainMetrics[keys].reset()
+    # for keys in TrainMetrics:
+    #     TrainMetrics[keys].reset()
     
     return train_acc, train_loss
 
