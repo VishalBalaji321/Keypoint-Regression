@@ -191,7 +191,7 @@ def validate(model, dataloader, data, epoch):
 # model 
 #model = KeypointResNet(pretrained=True, requires_grad=True, model_name=config.RESNET_MODEL).to(config.DEVICE)
 #model = KeypointEfficientNet(pretrained=True, requires_grad=True)
-model = KeypointCustom(isPretrained=False, requires_grad=True, model_name='tf_mobilenetv3_small_100')
+model = KeypointCustom(isPretrained=False, requires_grad=True, model_name=config.DEFAULT_MODEL)
 model = model.return_loaded_model().to(config.DEVICE)
 
 # optimizer

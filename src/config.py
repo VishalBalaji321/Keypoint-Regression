@@ -3,7 +3,7 @@ import torch
 # constant paths
 ROOT_PATH = 'Keypoint-Regression/input/ConeKeypoints'
 OUTPUT_PATH = 'Keypoint-Regression/outputs'
-DEFAULT_MODEL = 'resnet18'
+DEFAULT_MODEL = 'tf_mobilenetv3_small_100'
 
 IMG_SIZE = 80
 
