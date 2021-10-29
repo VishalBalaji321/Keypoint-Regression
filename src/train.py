@@ -20,11 +20,12 @@ def fit(model, dataloader, data):
     print('Training')
     model.train()
     train_running_loss = 0.0
-    counter = 0
+    train_acc = 0
     
     # calculate the number of batches
     num_batches = int(len(data)/dataloader.batch_size)
     counter = 1
+    count_output = 0
     #Creating a gradScaler at the beginning of the training
     scaler = GradScaler()
     
@@ -46,9 +47,15 @@ def fit(model, dataloader, data):
         #optimizer.step()
         scaler.step(optimizer)
         scaler.update()
-        
+
+        # Accuracy
+        _, predicted = torch.max(outputs.data, 1)
+        count_output += keypoints.size(0)
+        train_acc += (100 * (keypoints == predicted).sum().item()) / count_output
+
+    train_acc = train_acc / counter
     train_loss = train_running_loss/counter
-    return train_loss
+    return train_loss, train_acc
 
 # validatioon function
 def validate(model, dataloader, data, epoch):
@@ -99,7 +106,7 @@ for epoch in range(config.EPOCHS):
     print(f"Epoch {epoch+1} of {config.EPOCHS}")
     
     start_epoch = time.time()
-    train_epoch_loss = fit(model, train_loader, train_data)
+    train_acc, train_epoch_loss = fit(model, train_loader, train_data)
     end_epoch = time.time()
     epoch_train_time.append(end_epoch - start_epoch)
 
@@ -110,6 +117,7 @@ for epoch in range(config.EPOCHS):
     train_loss.append(train_epoch_loss)
     val_loss.append(val_epoch_loss)
     print(f"Train Loss: {train_epoch_loss:.4f}")
+    print(f"Train Accuracy: {train_acc:.4f}")
     print(f'Val Loss: {val_epoch_loss:.4f}')
     if (epoch % 5 == 0):
         torch.save({
