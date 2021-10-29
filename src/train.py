@@ -8,6 +8,7 @@ import config
 import utils
 import time
 import statistics as s
+import torchmetrics as tm
 
 from model import KeypointCustom
 from dataset import train_data, train_loader, valid_data, valid_loader
@@ -15,8 +16,9 @@ from tqdm import tqdm
 
 matplotlib.style.use('ggplot')
 
+
 # training function
-def fit(model, dataloader, data):
+def fit(model, dataloader, data, TrainMetrics):
     print('Training')
     model.train()
     train_running_loss = 0.0
@@ -52,12 +54,34 @@ def fit(model, dataloader, data):
         count_total += keypoints.size(0)
         train_acc += ((100 * (keypoints == outputs.round()).sum()) / count_total).item()
 
+        # Torchmetrics
+        TrainMetrics['accuracy'](outputs, keypoints)
+        TrainMetrics["area_under_curve"](outputs, keypoints)
+        TrainMetrics["precision"](outputs, keypoints)
+        TrainMetrics['recall'](outputs, keypoints)
+        TrainMetrics["f1_score"](outputs, keypoints)
+
+
     train_loss = train_running_loss/counter
     train_acc = train_acc / counter
+
+    # Torchmetrics
+    train_acc = TrainMetrics['accuracy'].compute()
+    train_auc = TrainMetrics["area_under_curve"].compute()
+    train_prec = TrainMetrics["precision"].compute()
+    train_recall = TrainMetrics['recall'].compute()
+    train_f1 = TrainMetrics["f1_score"].compute()
+
+    print(f"Accuracy: {train_acc}, AUC: {train_auc}, Precision: {train_prec}, Recall: {train_recall}, F1 Score: {train_f1}")
+    
+    # Reset the torchmetrics
+    for keys in TrainMetrics:
+        TrainMetrics[keys].reset()
+    
     return train_acc, train_loss
 
 # validatioon function
-def validate(model, dataloader, data, epoch):
+def validate(model, dataloader, data, epoch, ValidMetrics):
     print('Validating')
     model.eval()
     valid_running_loss = 0.0
@@ -82,6 +106,26 @@ def validate(model, dataloader, data, epoch):
     valid_loss = valid_running_loss/counter
     return valid_loss
 
+
+# Metrics
+
+train_metrics = {
+    "accuracy": tm.Accuracy(),
+    "area_under_curve": tm.AUC(),
+    "precision": tm.Precision(),
+    "recall": tm.Recall(),
+    "f1_score": tm.F1(),
+}
+
+valid_metrics = {
+    "accuracy": tm.Accuracy(),
+    "area_under_curve": tm.AUC(),
+    "precision": tm.Precision(),
+    "recall": tm.Recall(),
+    "f1_score": tm.F1(),
+}
+
+
 # model 
 #model = KeypointResNet(pretrained=True, requires_grad=True, model_name=config.RESNET_MODEL).to(config.DEVICE)
 #model = KeypointEfficientNet(pretrained=True, requires_grad=True)
@@ -105,11 +149,11 @@ for epoch in range(config.EPOCHS):
     print(f"Epoch {epoch+1} of {config.EPOCHS}")
     
     start_epoch = time.time()
-    train_acc, train_epoch_loss = fit(model, train_loader, train_data)
+    train_acc, train_epoch_loss = fit(model, train_loader, train_data, TrainMetrics=train_metrics)
     end_epoch = time.time()
     epoch_train_time.append(end_epoch - start_epoch)
 
-    val_epoch_loss = validate(model, valid_loader, valid_data, epoch)
+    val_epoch_loss = validate(model, valid_loader, valid_data, epoch, ValidMetrics=valid_metrics)
     end_val = time.time()
     val_time.append(end_val - end_epoch)
 

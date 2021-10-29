@@ -23,7 +23,7 @@ class KeypointDataset(Dataset):
     def __init__(self, samples, path, augment=None):
         self.data = samples
         self.path = path
-        self.size = 80
+        self.size = config.IMG_SIZE
         self.augment = augment
 
     def __len__(self):
@@ -76,8 +76,8 @@ class KeypointDataset(Dataset):
         image = torch.tensor(image, dtype=torch.float)
         keypoint = torch.tensor(keypoints, dtype=torch.float)
         
+        # Debug command -> To check when the tensor inputs are not of equal length
         if not torch.equal(torch.Tensor([8, 2]), torch.Tensor(list(keypoint.shape))):
-          
           print(f"Keypoints Initial: {keypoints_initial}")
           print(f"Keypoints Augment: {keypoints_augment}")
 
@@ -97,18 +97,20 @@ Transform = A.Compose([
         A.MotionBlur(p=.2),
         A.Blur(blur_limit=3, p=0.1),
     ], p=0.2),
-    #A.ShiftScaleRotate(shift_limit=0.0625, scale_limit=0.2, rotate_limit=20, p=0.2),
-    A.PiecewiseAffine(p=0.3),
+    A.ShiftScaleRotate(shift_limit=0.0625, scale_limit=0.2, rotate_limit=30, p=0.2),
+    A.PiecewiseAffine(p=0.05),
     A.OneOf([
         A.Sharpen(),
         A.Emboss(),
     ], p=0.3),
     A.OneOf([
         A.HueSaturationValue(p=0.3),
-        A.RandomContrast(p=0.3),
-        A.JpegCompression(p=0.3),
+        A.RandomBrightnessContrast(p=0.3),
+    ], p=0.4),
+    A.OneOf([
+        A.ImageCompression(p=0.3),
         A.ISONoise(p=0.4),
-    ], p=0.4)
+    ], p=0.6)
     #A.RandomFog(p=0.3),
     ],
     keypoint_params=A.KeypointParams(format='xy', remove_invisible=False)
