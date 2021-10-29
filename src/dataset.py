@@ -92,17 +92,23 @@ class KeypointDataset(Dataset):
 
 
 Transform = A.Compose([
-    A.HorizontalFlip(),
+    A.HorizontalFlip(p=0.5),
     A.OneOf([
         A.MotionBlur(p=.2),
         A.Blur(blur_limit=3, p=0.1),
     ], p=0.2),
-    A.ShiftScaleRotate(shift_limit=0.0625, scale_limit=0.2, rotate_limit=20, p=0.2),
+    #A.ShiftScaleRotate(shift_limit=0.0625, scale_limit=0.2, rotate_limit=20, p=0.2),
     A.PiecewiseAffine(p=0.3),
     A.OneOf([
         A.Sharpen(),
         A.Emboss(),
     ], p=0.3),
+    A.OneOf([
+        A.HueSaturationValue(p=0.3),
+        A.RandomContrast(p=0.3),
+        A.JpegCompression(p=0.3),
+        A.ISONoise(p=0.4),
+    ], p=0.4)
     #A.RandomFog(p=0.3),
     ],
     keypoint_params=A.KeypointParams(format='xy', remove_invisible=False)

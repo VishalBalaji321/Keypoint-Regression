@@ -20,12 +20,12 @@ def fit(model, dataloader, data):
     print('Training')
     model.train()
     train_running_loss = 0.0
-    train_acc = 0
+    train_acc = 0.0
     
     # calculate the number of batches
     num_batches = int(len(data)/dataloader.batch_size)
     counter = 1
-    count_output = 0
+    count_total = 0.0
     #Creating a gradScaler at the beginning of the training
     scaler = GradScaler()
     
@@ -49,13 +49,12 @@ def fit(model, dataloader, data):
         scaler.update()
 
         # Accuracy
-        _, predicted = torch.max(outputs.data, 1)
-        count_output += keypoints.size(0)
-        train_acc += (100 * (keypoints == predicted).sum().item()) / count_output
+        count_total += keypoints.size(0)
+        train_acc += ((100 * (keypoints == outputs.round()).sum()) / count_total).item()
 
-    train_acc = train_acc / counter
     train_loss = train_running_loss/counter
-    return train_loss, train_acc
+    train_acc = train_acc / counter
+    return train_acc, train_loss
 
 # validatioon function
 def validate(model, dataloader, data, epoch):
@@ -86,7 +85,7 @@ def validate(model, dataloader, data, epoch):
 # model 
 #model = KeypointResNet(pretrained=True, requires_grad=True, model_name=config.RESNET_MODEL).to(config.DEVICE)
 #model = KeypointEfficientNet(pretrained=True, requires_grad=True)
-model = KeypointCustom(isPretrained=False, requires_grad=True, model_name='tf_efficientnet_lite0')
+model = KeypointCustom(isPretrained=False, requires_grad=True, model_name='tf_mobilenetv3_large_minimal_100')
 model = model.return_loaded_model().to(config.DEVICE)
 
 # optimizer
