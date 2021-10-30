@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import config
 import random
-import albumentations as A
+import torch
 
 def valid_keypoints_plot(image, outputs, orig_keypoints, epoch):
     """
@@ -72,3 +72,36 @@ def dataset_keypoints_plot(data):
 
     plt.show()
     plt.close()
+
+def accuracy(outputs_tensor, keypoints_tensor):
+  # Coordinates of the four corners of the image
+  CORNERS = torch.tensor([(0, 0), (0, config.IMG_SIZE), (config.IMG_SIZE, 0), (config.IMG_SIZE, config.IMG_SIZE)])
+
+  avg_acc = 0.0
+  num_batches = 0
+  
+  for pred, target in zip(outputs_tensor, keypoints_tensor):
+    num_batches += 1
+    avg_acc_img = 0.0
+    num_point = 0
+    
+    for points in target.reshape(-1, 2):
+        # Finding the farthest corner
+        max_dist = 0
+        for corners in CORNERS:
+            euclid_distance = torch.sqrt(torch.pow(corners[0] - points[0], 2) + torch.pow(corners[1] - points[1], 2))
+            if euclid_distance > max_dist:
+                max_dist = euclid_distance
+        
+        dist_pred_target = torch.sqrt(torch.pow(pred.reshape(-1, 2)[num_point][0] - points[0], 2) + torch.pow(pred.reshape(-1, 2)[num_point][1] - points[1], 2))
+  
+        if max_dist > 0:
+            avg_acc_img += (max_dist - dist_pred_target)/max_dist
+        else:
+            print("Points cant be on the corner !!!")
+        
+        num_point += 1
+    avg_acc += avg_acc_img/num_point * 100
+  avg_acc = avg_acc / num_batches
+
+  return avg_acc

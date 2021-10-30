@@ -8,7 +8,7 @@ import config
 import utils
 import time
 import statistics as s
-
+import os
 import torchmetrics as tm
 
 from model import KeypointCustom
@@ -17,38 +17,48 @@ from tqdm import tqdm
 
 matplotlib.style.use('ggplot')
 
-def accuracy(outputs_tensor, keypoints_tensor):
-  # Coordinates of the four corners of the image
-  CORNERS = torch.tensor([(0, 0), (0, config.IMG_SIZE), (config.IMG_SIZE, 0), (config.IMG_SIZE, config.IMG_SIZE)])
+def save_model(validation_loss, full_model):
+    # full_model -> Tuple containing 'model', 'optimizer', 'criterion', 'epoch'
 
-  avg_acc = 0.0
-  num_batches = 0
-  
-  for pred, target in zip(outputs_tensor, keypoints_tensor):
-    num_batches += 1
-    avg_acc_img = 0.0
-    num_point = 0
+    weights_location = f'{config.OUTPUT_PATH}/{config.CURRENT_MODEL}/weights'
+    if not os.path.exists(weights_location):
+        os.makedirs(weights_location)
     
-    for points in target.reshape(-1, 2):
-        # Finding the farthest corner
-        max_dist = 0
-        for corners in CORNERS:
-            euclid_distance = torch.sqrt(torch.pow(corners[0] - points[0], 2) + torch.pow(corners[1] - points[1], 2))
-            if euclid_distance > max_dist:
-                max_dist = euclid_distance
-        
-        dist_pred_target = torch.sqrt(torch.pow(pred.reshape(-1, 2)[num_point][0] - points[0], 2) + torch.pow(pred.reshape(-1, 2)[num_point][1] - points[1], 2))
-  
-        if max_dist > 0:
-            avg_acc_img += (max_dist - dist_pred_target)/max_dist
-        else:
-            print("Points cant be on the corner !!!")
-        
-        num_point += 1
-    avg_acc += avg_acc_img/num_point * 100
-  avg_acc = avg_acc / num_batches
+    # For the first iteration
+    if 'last.pth' not in os.listdir(weights_location) and 'best.pth' not in os.listdir(weights_location):
+        weights_path = f'{weights_location}/last.pth'
+        torch.save({
+            'epoch': full_model[3],
+            'model_state_dict': full_model[0].state_dict(),
+            'optimizer_state_dict': full_model[1].state_dict(),
+            'loss': full_model[2],
+        }, weights_path)
 
-  return avg_acc
+    else:
+        # Saving the best model for the least validation loss
+        if validation_loss[-1] == min(validation_loss):
+            if 'best.pth' in os.listdir(weights_location):
+                os.remove(f'{weights_location}/best.pth')
+            
+            weights_path = f'{weights_location}/best.pth'
+            torch.save({
+                'epoch': full_model[3],
+                'model_state_dict': full_model[0].state_dict(),
+                'optimizer_state_dict': full_model[1].state_dict(),
+                'loss': full_model[2],
+            }, weights_path)
+        
+        if 'last.pth' in os.listdir(weights_location):
+            os.remove(f'{weights_location}/last.pth')
+            
+        weights_path = f'{weights_location}/last.pth'
+        torch.save({
+            'epoch': full_model[3],
+            'model_state_dict': full_model[0].state_dict(),
+            'optimizer_state_dict': full_model[1].state_dict(),
+            'loss': full_model[2],
+        }, weights_path)
+
 
 
 # training function
@@ -57,11 +67,11 @@ def fit(model, dataloader, data, TrainMetrics):
     model.train()
     train_running_loss = 0.0
     train_acc = 0.0
-    
+    counter = 1
+
     # calculate the number of batches
     num_batches = int(len(data)/dataloader.batch_size)
-    counter = 1
-    num_keypoints = 16
+    
     #Creating a gradScaler at the beginning of the training
     scaler = GradScaler()
     
@@ -86,25 +96,24 @@ def fit(model, dataloader, data, TrainMetrics):
 
         outputs = outputs.float().cpu()
         keypoints = keypoints.float().cpu()
-        train_acc += accuracy(outputs, keypoints)
+
+        train_acc += utils.accuracy(outputs, keypoints)
         # Torchmetrics
         TrainMetrics['r2'](outputs, keypoints)
         TrainMetrics["meanSquared"](outputs, keypoints)
         TrainMetrics["meanSquaredLog"](outputs, keypoints)
         TrainMetrics["meanAbsolute"](outputs, keypoints)
         
-
-
     train_loss = train_running_loss / counter
     train_acc = round((train_acc / counter).item(), 3)
-
-    #Torchmetrics
+    # Torchmetrics
     train_r2 = round((TrainMetrics['r2'].compute()).item(), 3)
     train_ms = round((TrainMetrics['meanSquared'].compute()).item(), 3)
     train_msl = round((TrainMetrics['meanSquaredLog'].compute()).item(), 3)
     train_ma = round((TrainMetrics['meanAbsolute'].compute()).item(), 3)
     
     print(f"Accuracy: {train_acc}, R2: {train_r2}, MeanSquared: {train_ms}, MeanSquaredLog: {train_msl}, MeanAbsolute: {train_ma}")
+    
     #Reset the torchmetrics
     for keys in TrainMetrics:
         TrainMetrics[keys].reset()
@@ -118,18 +127,13 @@ def validate(model, dataloader, data, epoch, ValidMetrics):
 
     valid_running_loss = 0.0
     counter = 1
-    
     valid_acc = 0.0
-    num_keypoints = 16
 
     # calculate the number of batches
     num_batches = int(len(data)/dataloader.batch_size)
     with torch.no_grad():
         for i, data in tqdm(enumerate(dataloader), total=num_batches):
-
             image = data['image'].to(config.DEVICE)
-           
-
             keypoints = data['keypoints'].to(config.DEVICE)
             
             # flatten the keypoints
@@ -147,25 +151,25 @@ def validate(model, dataloader, data, epoch, ValidMetrics):
             # Accuracy
             outputs = outputs.float().cpu()
             keypoints = keypoints.float().cpu()
-            valid_acc += accuracy(outputs, keypoints)
+            
+            valid_acc += utils.accuracy(outputs, keypoints)
             # Torchmetrics
             ValidMetrics['r2'](outputs, keypoints)
             ValidMetrics["meanSquared"](outputs, keypoints)
             ValidMetrics["meanSquaredLog"](outputs, keypoints)
             ValidMetrics["meanAbsolute"](outputs, keypoints)
         
-
-
     valid_loss = valid_running_loss / counter
     valid_acc = round((valid_acc / counter).item(), 3)
 
-    #Torchmetrics
+    # Torchmetrics
     valid_r2 = round((ValidMetrics['r2'].compute()).item(), 3)
     valid_ms = round((ValidMetrics['meanSquared'].compute()).item(), 3)
     valid_msl = round((ValidMetrics['meanSquaredLog'].compute()).item(), 3)
     valid_ma = round((ValidMetrics['meanAbsolute'].compute()).item(), 3)
     
     print(f"Accuracy: {valid_acc}, R2: {valid_r2}, MeanSquared: {valid_ms}, MeanSquaredLog: {valid_msl}, MeanAbsolute: {valid_ma}")
+    
     #Reset the torchmetrics
     for keys in ValidMetrics:
         ValidMetrics[keys].reset()
@@ -173,8 +177,7 @@ def validate(model, dataloader, data, epoch, ValidMetrics):
     return valid_loss
 
 
-# TorchMetrics -> Neat package for metrics but some weird errors for keypoints. Hence avoided
-
+# TorchMetrics
 model_metrics = {
     "r2": tm.R2Score(num_outputs=16),
     "meanSquared": tm.MeanSquaredError(),
@@ -185,7 +188,7 @@ model_metrics = {
 # model 
 #model = KeypointResNet(pretrained=True, requires_grad=True, model_name=config.RESNET_MODEL).to(config.DEVICE)
 #model = KeypointEfficientNet(pretrained=True, requires_grad=True)
-model = KeypointCustom(isPretrained=False, requires_grad=True, fineTuning=False,model_name=config.DEFAULT_MODEL)
+model = KeypointCustom(isPretrained=False, requires_grad=True, fineTuning=False,model_name=config.CURRENT_MODEL)
 model = model.return_loaded_model().to(config.DEVICE)
 
 # optimizer
@@ -194,6 +197,10 @@ optimizer = optim.Adam(model.parameters(), lr=config.LR)
 # we need a loss function which is good for regression like SmmothL1Loss ...
 # ... or MSELoss -> Use this when working with GrayScale Images
 criterion = nn.SmoothL1Loss()
+
+model_directory = f'{config.OUTPUT_PATH}/{config.CURRENT_MODEL}'
+if not os.path.exists(model_directory):
+    os.makedirs(model_directory)
 
 train_loss = []
 val_loss = []
@@ -217,13 +224,15 @@ for epoch in range(config.EPOCHS):
     val_loss.append(val_epoch_loss)
     print(f"Train Loss: {train_epoch_loss:.4f}")
     print(f'Val Loss: {val_epoch_loss:.4f}')
-    if (epoch % 5 == 0):
-        torch.save({
-            'epoch': config.EPOCHS,
-            'model_state_dict': model.state_dict(),
-            'optimizer_state_dict': optimizer.state_dict(),
-            'loss': criterion,
-            }, f"{config.OUTPUT_PATH}/model_{epoch}.pth")
+    # if (epoch % 5 == 0):
+    #     torch.save({
+    #         'epoch': config.EPOCHS,
+    #         'model_state_dict': model.state_dict(),
+    #         'optimizer_state_dict': optimizer.state_dict(),
+    #         'loss': criterion,
+    #         }, f"{config.OUTPUT_PATH}/model_{epoch}.pth")
+    save_model(val_loss, (model, optimizer, criterion, epoch))
+
 end_train = time.time()
 
 print(f"Training Time: {end_train - start_train}")
