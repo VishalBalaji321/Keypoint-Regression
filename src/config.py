@@ -4,8 +4,6 @@ import torch
 ROOT_PATH = 'Keypoint-Regression/input/ConeKeypoints'
 OUTPUT_PATH = 'Keypoint-Regression/outputs'
 
-CURRENT_MODEL = 'tf_mobilenetv3_small_100'
-
 IMG_SIZE = 80
 
 # learning parameters
@@ -23,6 +21,8 @@ SHOW_DATASET_PLOT = False
 print(f"PyTorch Detected DEVICE: {DEVICE}")
 
 # Models
+CURRENT_MODEL = 'tf_mobilenetv3_small_100'
+
 models_to_evaluate = [   
     'efficientnet_b0',
     'efficientnet_b1_pruned',

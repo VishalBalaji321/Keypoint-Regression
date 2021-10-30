@@ -10,6 +10,7 @@ import time
 import statistics as s
 import os
 import torchmetrics as tm
+import csv
 
 from model import KeypointCustom
 from dataset import train_data, train_loader, valid_data, valid_loader
@@ -138,128 +139,171 @@ model_metrics = {
     "meanAbsolute": tm.MeanAbsoluteError(),
 }
 
+final_model_summary_list = []
 
-# model 
-#model = KeypointResNet(pretrained=True, requires_grad=True, model_name=config.RESNET_MODEL).to(config.DEVICE)
-#model = KeypointEfficientNet(pretrained=True, requires_grad=True)
-model = KeypointCustom(isPretrained=False, requires_grad=True, fineTuning=False,model_name=config.CURRENT_MODEL)
-model = model.return_loaded_model().to(config.DEVICE)
+for modelName in config.models_to_evaluate:
+    config.CURRENT_MODEL = modelName
+    # model 
+    #model = KeypointResNet(pretrained=True, requires_grad=True, model_name=config.RESNET_MODEL).to(config.DEVICE)
+    #model = KeypointEfficientNet(pretrained=True, requires_grad=True)
+    model = KeypointCustom(isPretrained=False, requires_grad=True, fineTuning=False,model_name=config.CURRENT_MODEL)
+    model = model.return_loaded_model().to(config.DEVICE)
 
-# optimizer
-optimizer = optim.Adam(model.parameters(), lr=config.LR)
+    # optimizer
+    optimizer = optim.Adam(model.parameters(), lr=config.LR)
 
-# we need a loss function which is good for regression like SmmothL1Loss ...
-# ... or MSELoss -> Use this when working with GrayScale Images
-criterion = nn.SmoothL1Loss()
+    # we need a loss function which is good for regression like SmmothL1Loss ...
+    # ... or MSELoss -> Use this when working with GrayScale Images
+    criterion = nn.SmoothL1Loss()
 
-model_directory = f'{config.OUTPUT_PATH}/{config.CURRENT_MODEL}'
-if not os.path.exists(model_directory):
-    os.makedirs(model_directory)
-if not os.path.exists(f'{model_directory}/weights'):
-    os.makedirs(f'{model_directory}/weights')
-if not os.path.exists(f'{model_directory}/validation'):
-    os.makedirs(f'{model_directory}/validation')
-if not os.path.exists(f'{model_directory}/inference_fp16'):
-    os.makedirs(f'{model_directory}/inference_fp16')
+    model_directory = f'{config.OUTPUT_PATH}/{config.CURRENT_MODEL}'
+    if not os.path.exists(model_directory):
+        os.makedirs(model_directory)
+    if not os.path.exists(f'{model_directory}/weights'):
+        os.makedirs(f'{model_directory}/weights')
+    if not os.path.exists(f'{model_directory}/validation'):
+        os.makedirs(f'{model_directory}/validation')
+    if not os.path.exists(f'{model_directory}/inference_fp16'):
+        os.makedirs(f'{model_directory}/inference_fp16')
 
-train_loss = []
-train_acc = []
-train_r2 = []
-train_ms = []
-train_msl = []
-train_ma = []
+    train_loss = []
+    train_acc = []
+    train_r2 = []
+    train_ms = []
+    train_msl = []
+    train_ma = []
 
-val_loss = []
-val_acc = []
-val_r2 = []
-val_ms = []
-val_msl = []
-val_ma = []
+    val_loss = []
+    val_acc = []
+    val_r2 = []
+    val_ms = []
+    val_msl = []
+    val_ma = []
 
-epoch_train_time = []
-val_time = []
-start_train = time.time()
+    epoch_train_time = []
+    val_time = []
+    start_train = time.time()
 
-for epoch in range(config.EPOCHS):
+    for epoch in range(config.EPOCHS):
+        # Reducing the learning rate after a said number of epochs
+        if epoch + 1 == config.DECAY_EPOCH:
+            for _ in optimizer.param_groups:
+                _['lr'] = config.DECAY_LR
+
+        print(f"Epoch {epoch+1} of {config.EPOCHS}")
+        
+        start_epoch = time.time()
+        train_data = fit(model, train_loader, train_data, TrainMetrics=model_metrics)
+        end_epoch = time.time()
+        epoch_train_time.append(end_epoch - start_epoch)
+
+        valid_data = validate(model, valid_loader, valid_data, epoch, ValidMetrics=model_metrics)
+        end_val = time.time()
+        val_time.append(end_val - end_epoch)
+        
+        # Logging the train and validation parameters
+        train_loss.append(train_data[0])
+        train_acc.append(train_data[1])
+        train_r2.append(train_data[2])
+        train_ms.append(train_data[3])
+        train_msl.append(train_data[4])
+        train_ma.append(train_data[5])
+
+        val_loss.append(valid_data[0])
+        val_acc.append(valid_data[1])
+        val_r2.append(valid_data[2])
+        val_ms.append(valid_data[3])
+        val_msl.append(valid_data[4])
+        val_ma.append(valid_data[5])
+
+        print(f"Train:\nLoss: {train_data[0]}, Accuracy: {train_data[1]}, R2: {train_data[2]}, MeanSquared: {train_data[3]}, MeanSquaredLog: {train_data[4]}, MeanAbsolute: {train_data[5]}")
+        print(f"Valid:\nLoss: {valid_data[0]}, Accuracy: {valid_data[1]}, R2: {valid_data[2]}, MeanSquared: {valid_data[3]}, MeanSquaredLog: {valid_data[4]}, MeanAbsolute: {valid_data[5]}\n")
     
-    # Reducing the learning rate after a said number of epochs
-    if epoch + 1 == config.DECAY_EPOCH:
-        for _ in optimizer.param_groups:
-            _['lr'] = config.DECAY_LR
+        save_model(val_loss, (model, optimizer, criterion, epoch))
 
-    print(f"Epoch {epoch+1} of {config.EPOCHS}")
-    
-    start_epoch = time.time()
-    train_data = fit(model, train_loader, train_data, TrainMetrics=model_metrics)
-    end_epoch = time.time()
-    epoch_train_time.append(end_epoch - start_epoch)
+    end_train = time.time()
 
-    valid_data = validate(model, valid_loader, valid_data, epoch, ValidMetrics=model_metrics)
-    end_val = time.time()
-    val_time.append(end_val - end_epoch)
-    
-    # Logging the train and validation parameters
-    train_loss.append(train_data[0])
-    train_acc.append(train_data[1])
-    train_r2.append(train_data[2])
-    train_ms.append(train_data[3])
-    train_msl.append(train_data[4])
-    train_ma.append(train_data[5])
+    total_train_time = round((end_train - start_train)/ 60)
+    avg_epoch_train_time = round(s.mean(epoch_train_time), 2)
+    avg_epoch_valid_time = round(s.mean(val_time), 2)
 
-    val_loss.append(valid_data[0])
-    val_acc.append(valid_data[1])
-    val_r2.append(valid_data[2])
-    val_ms.append(valid_data[3])
-    val_msl.append(valid_data[4])
-    val_ma.append(valid_data[5])
+    print(f"Total Training Time: {total_train_time} min")
+    print(f"Average train time per epoch: {avg_epoch_train_time}s")
+    print(f"Average inference time per image: {avg_epoch_valid_time}s")
 
-    print(f"Train:\nLoss: {train_data[0]}, Accuracy: {train_data[1]}, R2: {train_data[2]}, MeanSquared: {train_data[3]}, MeanSquaredLog: {train_data[4]}, MeanAbsolute: {train_data[5]}")
-    print(f"Valid:\nLoss: {valid_data[0]}, Accuracy: {valid_data[1]}, R2: {valid_data[2]}, MeanSquared: {valid_data[3]}, MeanSquaredLog: {valid_data[4]}, MeanAbsolute: {valid_data[5]}")
-    # if (epoch % 5 == 0):
-    #     torch.save({
-    #         'epoch': config.EPOCHS,
-    #         'model_state_dict': model.state_dict(),
-    #         'optimizer_state_dict': optimizer.state_dict(),
-    #         'loss': criterion,
-    #         }, f"{config.OUTPUT_PATH}/model_{epoch}.pth")
-    save_model(val_loss, (model, optimizer, criterion, epoch))
+    plot_comparison_graph(train_loss, val_loss, "Training loss", "Validation loss", "Loss")
+    plot_comparison_graph(train_acc, val_acc, "Training accuracy", "Validation accuracy", "Accuracy")
+    plot_comparison_graph(train_r2, val_r2, "Training R2", "Validation R2", "R2 Score")
+    plot_comparison_graph(train_ms, val_ms, "Training Error", "Validation Error", "Mean Squared Error")
+    plot_comparison_graph(train_msl, val_msl, "Training Error", "Validation Error", "Mean Squared Log Error")
+    plot_comparison_graph(train_ma, val_ma, "Training Error", "Validation Error", "Mean Absolute Error")
 
-end_train = time.time()
+    model_summary = {
+        'Model name': config.CURRENT_MODEL,
+        'Final validation accuracy': val_acc[-1],
+        'Final training accuracy': train_acc[-1],
+        
+        'Total training time': total_train_time,
+        'Average Epoch training time': avg_epoch_train_time,
+        'Average Epoch validation time': avg_epoch_valid_time,
+        
+        'Final validation loss': val_loss[-1],
+        'Final training loss': train_loss[-1],
+        'Final validation R2': val_r2[-1],
+        'Final training R2': train_r2[-1],
+        'Final validation MeanSquared Error': val_ms[-1],
+        'Final training MeanSquared Error': train_ms[-1],
+        'Final validation MeanSquaredLog Error': val_msl[-1],
+        'Final training MeanSquaredLog Error': train_msl[-1],
+        'Final validation MeanAbsolute Error': val_ma[-1],
+        'Final training MeanAbsolute Error': train_ma[-1]
+    }
 
-total_train_time = round((end_train - start_train)/ 60)
-avg_epoch_train_time = round(s.mean(epoch_train_time), 2)
-avg_epoch_valid_time = round(s.mean(val_time), 2)
+    # Dumping all the other metrics into the csv file for future use
+    for num, data in enumerate(train_acc):
+        model_summary[f'train_acc_{num + 1}'] = data
 
-print(f"Total Training Time: {total_train_time}min")
-print(f"Average train time per epoch: {avg_epoch_train_time}s")
-print(f"Average inference time per image: {avg_epoch_valid_time}")
+    for num, data in enumerate(val_acc):
+        model_summary[f'val_acc_{num + 1}'] = data
 
-plot_comparison_graph(train_loss, val_loss, "Train loss", "Validation loss", "Loss")
-plot_comparison_graph(train_acc, val_acc, "Train accuracy", "Validation accuracy", "Accuracy")
-plot_comparison_graph(train_r2, val_r2, "Train R2", "Validation R2", "R2 Score")
-plot_comparison_graph(train_ms, val_ms, "Train Error", "Validation Error", "MeanSquared Error")
-plot_comparison_graph(train_msl, val_msl, "Train Error", "Validation Error", "MeanSquaredLog Error")
-plot_comparison_graph(train_ma, val_ma, "Train Error", "Validation Error", "MeanAbsolute Error")
+    for num, data in enumerate(train_loss):
+        model_summary[f'train_loss_{num + 1}'] = data
 
+    for num, data in enumerate(val_loss):
+        model_summary[f'val_loss_{num + 1}'] = data
 
-# loss plots
-# plt.figure(figsize=(10, 7))
-# plt.plot(train_loss, color='orange', label='train loss')
-# plt.plot(val_loss, color='red', label='validataion loss')
-# plt.xlabel('Epochs')
-# plt.ylabel('Loss')
-# plt.legend()
-# plt.figtext(0.5, 0.01, f"Total training Time: {round(end_train - start_train, 2)}s", ha="center", fontsize=10)
-# plt.figtext(0.5, 0.11, f"Average train time per epoch: {round(s.mean(epoch_train_time), 2)}s", ha="center", fontsize=10)
-# plt.figtext(0.5, 0.21, f"Average inference time per image: {round(s.mean(val_time), 2)}s", ha="center", fontsize=10)
+    for num, data in enumerate(train_r2):
+        model_summary[f'train_r2_{num + 1}'] = data
 
+    for num, data in enumerate(val_r2):
+        model_summary[f'val_r2_{num + 1}'] = data
 
-# plt.savefig(f"{config.OUTPUT_PATH}/loss.png")
-#plt.show()
-# torch.save({
-#             'epoch': config.EPOCHS,
-#             'model_state_dict': model.state_dict(),
-#             'optimizer_state_dict': optimizer.state_dict(),
-#             'loss': criterion,
-#             }, f"{config.OUTPUT_PATH}/model_final.pth")
-print('DONE TRAINING')
+    for num, data in enumerate(train_ms):
+        model_summary[f'train_ms_{num + 1}'] = data
+
+    for num, data in enumerate(val_ms):
+        model_summary[f'val_ms_{num + 1}'] = data
+
+    for num, data in enumerate(train_msl):
+        model_summary[f'train_msl_{num + 1}'] = data
+
+    for num, data in enumerate(val_msl):
+        model_summary[f'val_msl_{num + 1}'] = data
+
+    for num, data in enumerate(train_ma):
+        model_summary[f'train_ma_{num + 1}'] = data
+
+    for num, data in enumerate(val_ma):
+        model_summary[f'val_ma_{num + 1}'] = data
+
+    final_model_summary_list.append(model_summary)
+
+print('DONE TRAINING !! Now saving all the analysis.....')
+
+keys = final_model_summary_list[0].keys()
+with open(f'{config.OUTPUT_PATH}/model_analysis.csv', 'w', newline='')  as output_file:
+    dict_writer = csv.DictWriter(output_file, keys)
+    dict_writer.writeheader()
+    dict_writer.writerows(final_model_summary_list)
+
+print(f"Finished !! Model Analysis summary file stored at: {config.OUTPUT_PATH}/model_analysis.csv")

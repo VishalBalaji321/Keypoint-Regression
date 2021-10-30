@@ -27,4 +27,5 @@ with open('trial.csv', 'w', newline='')  as output_file:
     dict_writer.writeheader()
     dict_writer.writerows(data_list)
 
-print(round(635/60))
+for index, item in enumerate(data_list):
+    print(index, item)
