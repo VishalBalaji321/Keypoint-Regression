@@ -92,7 +92,6 @@ class KeypointDataset(Dataset):
 
 
 Transform = A.Compose([
-    A.HorizontalFlip(p=0.5),
     A.OneOf([
         A.MotionBlur(p=.2),
         A.Blur(blur_limit=3, p=0.1),

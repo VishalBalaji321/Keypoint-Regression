@@ -8,7 +8,8 @@ import config
 import utils
 import time
 import statistics as s
-# import torchmetrics as tm
+
+import torchmetrics as tm
 
 from model import KeypointCustom
 from dataset import train_data, train_loader, valid_data, valid_loader
@@ -16,21 +17,51 @@ from tqdm import tqdm
 
 matplotlib.style.use('ggplot')
 
+def accuracy(outputs_tensor, keypoints_tensor):
+  # Coordinates of the four corners of the image
+  CORNERS = torch.tensor([(0, 0), (0, config.IMG_SIZE), (config.IMG_SIZE, 0), (config.IMG_SIZE, config.IMG_SIZE)])
+
+  avg_acc = 0.0
+  num_batches = 0
+  
+  for pred, target in zip(outputs_tensor, keypoints_tensor):
+    num_batches += 1
+    avg_acc_img = 0.0
+    num_point = 0
+    
+    for points in target.reshape(-1, 2):
+        # Finding the farthest corner
+        max_dist = 0
+        for corners in CORNERS:
+            euclid_distance = torch.sqrt(torch.pow(corners[0] - points[0], 2) + torch.pow(corners[1] - points[1], 2))
+            if euclid_distance > max_dist:
+                max_dist = euclid_distance
+        
+        dist_pred_target = torch.sqrt(torch.pow(pred.reshape(-1, 2)[num_point][0] - points[0], 2) + torch.pow(pred.reshape(-1, 2)[num_point][1] - points[1], 2))
+  
+        if max_dist > 0:
+            avg_acc_img += (max_dist - dist_pred_target)/max_dist
+        else:
+            print("Points cant be on the corner !!!")
+        
+        num_point += 1
+    avg_acc += avg_acc_img/num_point * 100
+  avg_acc = avg_acc / num_batches
+
+  return avg_acc
+
 
 # training function
-def fit(model, dataloader, data):
+def fit(model, dataloader, data, TrainMetrics):
     print('Training')
     model.train()
     train_running_loss = 0.0
     train_acc = 0.0
-    train_prec = 0.0
-    train_recall = 0.0
-    train_f1 = 0.0
     
     # calculate the number of batches
     num_batches = int(len(data)/dataloader.batch_size)
     counter = 1
-    num_keypoints = 0
+    num_keypoints = 16
     #Creating a gradScaler at the beginning of the training
     scaler = GradScaler()
     
@@ -53,68 +84,43 @@ def fit(model, dataloader, data):
         scaler.step(optimizer)
         scaler.update()
 
-        # Accuracy
-        num_keypoints += keypoints.size(0)
-        train_acc += ((100 * (keypoints == outputs.round()).sum()) / num_keypoints).item()
-
-        # Precision, Recall, F1_Score
-        tp = ((keypoints * outputs.round()).sum() / num_keypoints).item()
-        fp = ((keypoints * (1 - outputs.round())).sum() / num_keypoints).item()
-        fn = (((1 - keypoints) * outputs.round()).sum() / num_keypoints).item()
-
-        precision = tp / (tp + fp + 1e-7)
-        train_prec += precision
-        
-        recall = tp / (tp + fn + 1e-7)
-        train_recall += recall
-        
-        train_f1 += (2 * precision * recall) / (precision + recall)
-
+        outputs = outputs.float().cpu()
+        keypoints = keypoints.float().cpu()
+        train_acc += accuracy(outputs, keypoints)
         # Torchmetrics
-        # TrainMetrics['accuracy'](outputs, keypoints)
-        # TrainMetrics["area_under_curve"](outputs, keypoints)
-        # TrainMetrics["precision"](outputs, keypoints)
-        # TrainMetrics['recall'](outputs, keypoints)
-        # TrainMetrics["f1_score"](outputs, keypoints)
+        TrainMetrics['r2'](outputs, keypoints)
+        TrainMetrics["meanSquared"](outputs, keypoints)
+        TrainMetrics["meanSquaredLog"](outputs, keypoints)
+        TrainMetrics["meanAbsolute"](outputs, keypoints)
+        
 
 
     train_loss = train_running_loss / counter
-    train_acc = train_acc / counter
-    train_recall = train_recall / counter
-    train_prec = train_prec / counter
-    train_f1 = train_f1 / counter
+    train_acc = round((train_acc / counter).item(), 3)
 
-    # Torchmetrics
-    # train_acc = TrainMetrics['accuracy'].compute()
-    # train_auc = TrainMetrics["area_under_curve"].compute()
-    # train_prec = TrainMetrics["precision"].compute()
-    # train_recall = TrainMetrics['recall'].compute()
-    # train_f1 = TrainMetrics["f1_score"].compute()
-
-    print(f"Accuracy: {round(train_acc, 2)}, Precision: {round(train_prec, 2)}, Recall: {round(train_recall, 2)}, F1 Score: {round(train_f1, 2)}")
+    #Torchmetrics
+    train_r2 = round((TrainMetrics['r2'].compute()).item(), 3)
+    train_ms = round((TrainMetrics['meanSquared'].compute()).item(), 3)
+    train_msl = round((TrainMetrics['meanSquaredLog'].compute()).item(), 3)
+    train_ma = round((TrainMetrics['meanAbsolute'].compute()).item(), 3)
     
-    # Reset the torchmetrics
-    # for keys in TrainMetrics:
-    #     TrainMetrics[keys].reset()
+    print(f"Accuracy: {train_acc}, R2: {train_r2}, MeanSquared: {train_ms}, MeanSquaredLog: {train_msl}, MeanAbsolute: {train_ma}")
+    #Reset the torchmetrics
+    for keys in TrainMetrics:
+        TrainMetrics[keys].reset()
     
     return train_loss
 
 # validatioon function
-def validate(model, dataloader, data, epoch):
+def validate(model, dataloader, data, epoch, ValidMetrics):
     print('Validating')
     model.eval()
-    model.cuda()
-    model.half()
 
     valid_running_loss = 0.0
     counter = 1
     
     valid_acc = 0.0
-    valid_prec = 0.0
-    valid_recall = 0.0
-    valid_f1 = 0.0
-
-    num_keypoints = 0
+    num_keypoints = 16
 
     # calculate the number of batches
     num_batches = int(len(data)/dataloader.batch_size)
@@ -122,10 +128,9 @@ def validate(model, dataloader, data, epoch):
         for i, data in tqdm(enumerate(dataloader), total=num_batches):
 
             image = data['image'].to(config.DEVICE)
-            image = image.half() 
+           
 
             keypoints = data['keypoints'].to(config.DEVICE)
-            keypoints = keypoints.half()
             
             # flatten the keypoints
             keypoints = keypoints.view(keypoints.size(0), -1)
@@ -138,58 +143,49 @@ def validate(model, dataloader, data, epoch):
             # ... predefined number of epochs
             if (epoch+1) % 1 == 0 and i == 0:
                 utils.valid_keypoints_plot(image, outputs, keypoints, epoch)
+            
             # Accuracy
-            num_keypoints += keypoints.size(0)
-            valid_acc += ((100 * (keypoints == outputs.round()).sum()) / num_keypoints).item()
+            outputs = outputs.float().cpu()
+            keypoints = keypoints.float().cpu()
+            valid_acc += accuracy(outputs, keypoints)
+            # Torchmetrics
+            ValidMetrics['r2'](outputs, keypoints)
+            ValidMetrics["meanSquared"](outputs, keypoints)
+            ValidMetrics["meanSquaredLog"](outputs, keypoints)
+            ValidMetrics["meanAbsolute"](outputs, keypoints)
+        
 
-            # Precision, Recall, F1_Score
-            tp = ((keypoints * outputs.round()).sum() / num_keypoints).item()
-            fp = ((keypoints * (1 - outputs.round())).sum() / num_keypoints).item()
-            fn = (((1 - keypoints) * outputs.round()).sum() / num_keypoints).item()
 
-            precision = tp / (tp + fp + 1e-7)
-            valid_prec += precision
-            
-            recall = tp / (tp + fn + 1e-7)
-            valid_recall += recall
-            
-            valid_f1 += (2 * precision * recall) / (precision + recall)
-    
     valid_loss = valid_running_loss / counter
-    valid_acc = valid_acc / counter
-    valid_recall = valid_recall / counter
-    valid_prec = valid_prec / counter
-    valid_f1 = valid_f1 / counter
+    valid_acc = round((valid_acc / counter).item(), 3)
 
-    print(f"Accuracy: {round(valid_acc, 2)}, Precision: {round(valid_prec, 2)}, Recall: {round(valid_recall, 2)}, F1 Score: {round(valid_f1, 2)}")
+    #Torchmetrics
+    valid_r2 = round((ValidMetrics['r2'].compute()).item(), 3)
+    valid_ms = round((ValidMetrics['meanSquared'].compute()).item(), 3)
+    valid_msl = round((ValidMetrics['meanSquaredLog'].compute()).item(), 3)
+    valid_ma = round((ValidMetrics['meanAbsolute'].compute()).item(), 3)
     
-    valid_loss = valid_running_loss/counter
+    print(f"Accuracy: {valid_acc}, R2: {valid_r2}, MeanSquared: {valid_ms}, MeanSquaredLog: {valid_msl}, MeanAbsolute: {valid_ma}")
+    #Reset the torchmetrics
+    for keys in ValidMetrics:
+        ValidMetrics[keys].reset()
+
     return valid_loss
 
 
 # TorchMetrics -> Neat package for metrics but some weird errors for keypoints. Hence avoided
 
-# train_metrics = {
-#     "accuracy": tm.Accuracy(),
-#     "area_under_curve": tm.AUC(),
-#     "precision": tm.Precision(),
-#     "recall": tm.Recall(),
-#     "f1_score": tm.F1(),
-# }
-
-# valid_metrics = {
-#     "accuracy": tm.Accuracy(),
-#     "area_under_curve": tm.AUC(),
-#     "precision": tm.Precision(),
-#     "recall": tm.Recall(),
-#     "f1_score": tm.F1(),
-# }
-
+model_metrics = {
+    "r2": tm.R2Score(num_outputs=16),
+    "meanSquared": tm.MeanSquaredError(),
+    "meanSquaredLog": tm.MeanSquaredLogError(),
+    "meanAbsolute": tm.MeanAbsoluteError(),
+}
 
 # model 
 #model = KeypointResNet(pretrained=True, requires_grad=True, model_name=config.RESNET_MODEL).to(config.DEVICE)
 #model = KeypointEfficientNet(pretrained=True, requires_grad=True)
-model = KeypointCustom(isPretrained=False, requires_grad=True, model_name=config.DEFAULT_MODEL)
+model = KeypointCustom(isPretrained=False, requires_grad=True, fineTuning=False,model_name=config.DEFAULT_MODEL)
 model = model.return_loaded_model().to(config.DEVICE)
 
 # optimizer
@@ -209,11 +205,11 @@ for epoch in range(config.EPOCHS):
     print(f"Epoch {epoch+1} of {config.EPOCHS}")
     
     start_epoch = time.time()
-    train_epoch_loss = fit(model, train_loader, train_data)
+    train_epoch_loss = fit(model, train_loader, train_data, TrainMetrics=model_metrics)
     end_epoch = time.time()
     epoch_train_time.append(end_epoch - start_epoch)
 
-    val_epoch_loss = validate(model, valid_loader, valid_data, epoch)
+    val_epoch_loss = validate(model, valid_loader, valid_data, epoch, ValidMetrics=model_metrics)
     end_val = time.time()
     val_time.append(end_val - end_epoch)
 
