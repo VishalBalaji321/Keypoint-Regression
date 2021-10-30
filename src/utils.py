@@ -149,3 +149,15 @@ def save_model(validation_loss, full_model):
             'optimizer_state_dict': full_model[1].state_dict(),
             'loss': full_model[2],
         }, weights_path)
+
+
+def plot_comparison_graph(data_1, data_2, label_1, label_2, y_label):
+    plt.figure(figsize=(10, 7))
+    plt.plot(data_1, color='orange', label=label_1)
+    plt.plot(data_2, color='red', label=label_2)
+    plt.xlabel('Epochs')
+    plt.ylabel(y_label)
+    plt.title(config.CURRENT_MODEL)
+    plt.legend()
+
+    plt.savefig(f"{config.OUTPUT_PATH}/{config.CURRENT_MODEL}/{y_label}.png")

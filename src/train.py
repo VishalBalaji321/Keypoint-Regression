@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import torch.nn as nn
 import matplotlib
 import config
-from utils import save_model, accuracy, valid_keypoints_plot
+from utils import save_model, accuracy, valid_keypoints_plot, plot_comparison_graph
 import time
 import statistics as s
 import os
@@ -32,7 +32,7 @@ def fit(model, dataloader, data, TrainMetrics):
     #Creating a gradScaler at the beginning of the training
     scaler = GradScaler()
     
-    for i, data in tqdm(enumerate(dataloader), total=num_batches):
+    for _, data in tqdm(enumerate(dataloader), total=num_batches):
         
         image, keypoints = data['image'].to(config.DEVICE), data['keypoints'].to(config.DEVICE)
         # flatten the keypoints
@@ -61,7 +61,7 @@ def fit(model, dataloader, data, TrainMetrics):
         TrainMetrics["meanSquaredLog"](outputs, keypoints)
         TrainMetrics["meanAbsolute"](outputs, keypoints)
         
-    train_loss = train_running_loss / counter
+    train_loss = round((train_running_loss / counter), 4)
     train_acc = round((train_acc / counter).item(), 3)
     # Torchmetrics
     train_r2 = round((TrainMetrics['r2'].compute()).item(), 3)
@@ -69,13 +69,11 @@ def fit(model, dataloader, data, TrainMetrics):
     train_msl = round((TrainMetrics['meanSquaredLog'].compute()).item(), 3)
     train_ma = round((TrainMetrics['meanAbsolute'].compute()).item(), 3)
     
-    print(f"Accuracy: {train_acc}, R2: {train_r2}, MeanSquared: {train_ms}, MeanSquaredLog: {train_msl}, MeanAbsolute: {train_ma}")
-    
     #Reset the torchmetrics
     for keys in TrainMetrics:
         TrainMetrics[keys].reset()
     
-    return train_loss
+    return (train_loss, train_acc, train_r2, train_ms, train_msl, train_ma)
 
 # validatioon function
 def validate(model, dataloader, data, epoch, ValidMetrics):
@@ -100,6 +98,7 @@ def validate(model, dataloader, data, epoch, ValidMetrics):
             if not loss.isnan():
                 valid_running_loss += loss.detach().cpu().numpy()
                 counter += 1
+
             # plot the predicted validation keypoints after every...
             # ... predefined number of epochs
             valid_keypoints_plot(image, outputs, keypoints, epoch)
@@ -115,7 +114,7 @@ def validate(model, dataloader, data, epoch, ValidMetrics):
             ValidMetrics["meanSquaredLog"](outputs, keypoints)
             ValidMetrics["meanAbsolute"](outputs, keypoints)
         
-    valid_loss = valid_running_loss / counter
+    valid_loss = round(valid_running_loss / counter, 4)
     valid_acc = round((valid_acc / counter).item(), 3)
 
     # Torchmetrics
@@ -124,13 +123,11 @@ def validate(model, dataloader, data, epoch, ValidMetrics):
     valid_msl = round((ValidMetrics['meanSquaredLog'].compute()).item(), 3)
     valid_ma = round((ValidMetrics['meanAbsolute'].compute()).item(), 3)
     
-    print(f"Accuracy: {valid_acc}, R2: {valid_r2}, MeanSquared: {valid_ms}, MeanSquaredLog: {valid_msl}, MeanAbsolute: {valid_ma}")
-    
     #Reset the torchmetrics
     for keys in ValidMetrics:
         ValidMetrics[keys].reset()
 
-    return valid_loss
+    return (valid_loss, valid_acc, valid_r2, valid_ms, valid_msl, valid_ma)
 
 
 # TorchMetrics
@@ -140,6 +137,7 @@ model_metrics = {
     "meanSquaredLog": tm.MeanSquaredLogError(),
     "meanAbsolute": tm.MeanAbsoluteError(),
 }
+
 
 # model 
 #model = KeypointResNet(pretrained=True, requires_grad=True, model_name=config.RESNET_MODEL).to(config.DEVICE)
@@ -165,27 +163,58 @@ if not os.path.exists(f'{model_directory}/inference_fp16'):
     os.makedirs(f'{model_directory}/inference_fp16')
 
 train_loss = []
+train_acc = []
+train_r2 = []
+train_ms = []
+train_msl = []
+train_ma = []
+
 val_loss = []
+val_acc = []
+val_r2 = []
+val_ms = []
+val_msl = []
+val_ma = []
 
 epoch_train_time = []
 val_time = []
 start_train = time.time()
+
 for epoch in range(config.EPOCHS):
+    
+    # Reducing the learning rate after a said number of epochs
+    if epoch + 1 == config.DECAY_EPOCH:
+        for _ in optimizer.param_groups:
+            _['lr'] = config.DECAY_LR
+
     print(f"Epoch {epoch+1} of {config.EPOCHS}")
     
     start_epoch = time.time()
-    train_epoch_loss = fit(model, train_loader, train_data, TrainMetrics=model_metrics)
+    train_data = fit(model, train_loader, train_data, TrainMetrics=model_metrics)
     end_epoch = time.time()
     epoch_train_time.append(end_epoch - start_epoch)
 
-    val_epoch_loss = validate(model, valid_loader, valid_data, epoch, ValidMetrics=model_metrics)
+    valid_data = validate(model, valid_loader, valid_data, epoch, ValidMetrics=model_metrics)
     end_val = time.time()
     val_time.append(end_val - end_epoch)
+    
+    # Logging the train and validation parameters
+    train_loss.append(train_data[0])
+    train_acc.append(train_data[1])
+    train_r2.append(train_data[2])
+    train_ms.append(train_data[3])
+    train_msl.append(train_data[4])
+    train_ma.append(train_data[5])
 
-    train_loss.append(train_epoch_loss)
-    val_loss.append(val_epoch_loss)
-    print(f"Train Loss: {train_epoch_loss:.4f}")
-    print(f'Val Loss: {val_epoch_loss:.4f}')
+    val_loss.append(valid_data[0])
+    val_acc.append(valid_data[1])
+    val_r2.append(valid_data[2])
+    val_ms.append(valid_data[3])
+    val_msl.append(valid_data[4])
+    val_ma.append(valid_data[5])
+
+    print(f"Train:\nLoss: {train_data[0]}, Accuracy: {train_data[1]}, R2: {train_data[2]}, MeanSquared: {train_data[3]}, MeanSquaredLog: {train_data[4]}, MeanAbsolute: {train_data[5]}")
+    print(f"Valid:\nLoss: {valid_data[0]}, Accuracy: {valid_data[1]}, R2: {valid_data[2]}, MeanSquared: {valid_data[3]}, MeanSquaredLog: {valid_data[4]}, MeanAbsolute: {valid_data[5]}")
     # if (epoch % 5 == 0):
     #     torch.save({
     #         'epoch': config.EPOCHS,
@@ -197,27 +226,40 @@ for epoch in range(config.EPOCHS):
 
 end_train = time.time()
 
-print(f"Training Time: {end_train - start_train}")
-print(f"Average train time per epoch: {s.mean(epoch_train_time)}")
-print(f"Average inference time per image: {s.mean(val_time)}")
+total_train_time = round((end_train - start_train)/ 60)
+avg_epoch_train_time = round(s.mean(epoch_train_time), 2)
+avg_epoch_valid_time = round(s.mean(val_time), 2)
+
+print(f"Total Training Time: {total_train_time}min")
+print(f"Average train time per epoch: {avg_epoch_train_time}s")
+print(f"Average inference time per image: {avg_epoch_valid_time}")
+
+plot_comparison_graph(train_loss, val_loss, "Train loss", "Validation loss", "Loss")
+plot_comparison_graph(train_acc, val_acc, "Train accuracy", "Validation accuracy", "Accuracy")
+plot_comparison_graph(train_r2, val_r2, "Train R2", "Validation R2", "R2 Score")
+plot_comparison_graph(train_ms, val_ms, "Train Error", "Validation Error", "MeanSquared Error")
+plot_comparison_graph(train_msl, val_msl, "Train Error", "Validation Error", "MeanSquaredLog Error")
+plot_comparison_graph(train_ma, val_ma, "Train Error", "Validation Error", "MeanAbsolute Error")
+
+
 # loss plots
-plt.figure(figsize=(10, 7))
-plt.plot(train_loss, color='orange', label='train loss')
-plt.plot(val_loss, color='red', label='validataion loss')
-plt.xlabel('Epochs')
-plt.ylabel('Loss')
-plt.legend()
-plt.figtext(0.5, 0.01, f"Total training Time: {round(end_train - start_train, 2)}s", ha="center", fontsize=10)
-plt.figtext(0.5, 0.11, f"Average train time per epoch: {round(s.mean(epoch_train_time), 2)}s", ha="center", fontsize=10)
-plt.figtext(0.5, 0.21, f"Average inference time per image: {round(s.mean(val_time), 2)}s", ha="center", fontsize=10)
+# plt.figure(figsize=(10, 7))
+# plt.plot(train_loss, color='orange', label='train loss')
+# plt.plot(val_loss, color='red', label='validataion loss')
+# plt.xlabel('Epochs')
+# plt.ylabel('Loss')
+# plt.legend()
+# plt.figtext(0.5, 0.01, f"Total training Time: {round(end_train - start_train, 2)}s", ha="center", fontsize=10)
+# plt.figtext(0.5, 0.11, f"Average train time per epoch: {round(s.mean(epoch_train_time), 2)}s", ha="center", fontsize=10)
+# plt.figtext(0.5, 0.21, f"Average inference time per image: {round(s.mean(val_time), 2)}s", ha="center", fontsize=10)
 
 
-plt.savefig(f"{config.OUTPUT_PATH}/loss.png")
-plt.show()
-torch.save({
-            'epoch': config.EPOCHS,
-            'model_state_dict': model.state_dict(),
-            'optimizer_state_dict': optimizer.state_dict(),
-            'loss': criterion,
-            }, f"{config.OUTPUT_PATH}/model_final.pth")
+# plt.savefig(f"{config.OUTPUT_PATH}/loss.png")
+#plt.show()
+# torch.save({
+#             'epoch': config.EPOCHS,
+#             'model_state_dict': model.state_dict(),
+#             'optimizer_state_dict': optimizer.state_dict(),
+#             'loss': criterion,
+#             }, f"{config.OUTPUT_PATH}/model_final.pth")
 print('DONE TRAINING')

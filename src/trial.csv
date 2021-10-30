@@ -1,0 +1,3 @@
+Model Name,train_loss_1,val_loss_1,final_accuracy
+EffNetV2,8.345,13.2342,90.45
+MobileNet,18.35,23.42,88.75

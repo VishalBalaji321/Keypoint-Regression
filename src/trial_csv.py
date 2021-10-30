@@ -1,37 +1,30 @@
+import pandas as pd
+import csv
 
-import torch
-import torch.nn as nn
 
-pred = torch.tensor([5, 10, 20, 32])
-target = torch.tensor([4, 12, 18, 36])
-IMG_SIZE = 45
+data_list = []
 
-CORNERS = torch.tensor([(0, 0), (0, IMG_SIZE), (IMG_SIZE, 0), (IMG_SIZE, IMG_SIZE)])
+data_1 = {
+    'Model Name': "EffNetV2",
+    'train_loss_1': 8.345,
+    'val_loss_1': 13.2342,
+    'final_accuracy': 90.45
+}
+data_list.append(data_1)
 
-#print(pred.size())
-#dist = nn.functional.pairwise_distance(pred, CORNERS)
-#print(dist)
+data_2 = {
+    'Model Name': "MobileNet",
+    'train_loss_1': 18.35,
+    'val_loss_1': 23.42,
+    'final_accuracy': 88.75
+}
+data_list.append(data_2)
 
-avg_acc = 0.0
-num_point = 0
-# Finding the farthest corner
-for points in target.reshape(-1, 2):
-    max_dist = 0
-    for corners in CORNERS:
-        euclid_distance = torch.sqrt(torch.pow(corners[0] - points[0], 2) + torch.pow(corners[1] - points[1], 2))
-        if euclid_distance > max_dist:
-            max_dist = euclid_distance
-    
-    dist_pred_target = torch.sqrt(torch.pow(pred.reshape(-1, 2)[num_point][0] - points[0], 2) + torch.pow(pred.reshape(-1, 2)[num_point][1] - points[1], 2))
-    print(dist_pred_target)
-    print(max_dist)
-    print()
 
-    if max_dist > 0:
-        avg_acc += (max_dist - dist_pred_target)/max_dist
-    else:
-        print("Max dist between target and predictions is 0 !!!")
-    
-    num_point += 1
+keys = data_list[0].keys()
+with open('trial.csv', 'w', newline='')  as output_file:
+    dict_writer = csv.DictWriter(output_file, keys)
+    dict_writer.writeheader()
+    dict_writer.writerows(data_list)
 
-print(avg_acc/num_point * 100)
+print(round(635/60))
