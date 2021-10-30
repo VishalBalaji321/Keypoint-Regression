@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import torch.nn as nn
 import matplotlib
 import config
-import utils
+from utils import save_model, accuracy, valid_keypoints_plot
 import time
 import statistics as s
 import os
@@ -16,49 +16,6 @@ from dataset import train_data, train_loader, valid_data, valid_loader
 from tqdm import tqdm
 
 matplotlib.style.use('ggplot')
-
-def save_model(validation_loss, full_model):
-    # full_model -> Tuple containing 'model', 'optimizer', 'criterion', 'epoch'
-
-    weights_location = f'{config.OUTPUT_PATH}/{config.CURRENT_MODEL}/weights'
-    if not os.path.exists(weights_location):
-        os.makedirs(weights_location)
-    
-    # For the first iteration
-    if 'last.pth' not in os.listdir(weights_location) and 'best.pth' not in os.listdir(weights_location):
-        weights_path = f'{weights_location}/last.pth'
-        torch.save({
-            'epoch': full_model[3],
-            'model_state_dict': full_model[0].state_dict(),
-            'optimizer_state_dict': full_model[1].state_dict(),
-            'loss': full_model[2],
-        }, weights_path)
-
-    else:
-        # Saving the best model for the least validation loss
-        if validation_loss[-1] == min(validation_loss):
-            if 'best.pth' in os.listdir(weights_location):
-                os.remove(f'{weights_location}/best.pth')
-            
-            weights_path = f'{weights_location}/best.pth'
-            torch.save({
-                'epoch': full_model[3],
-                'model_state_dict': full_model[0].state_dict(),
-                'optimizer_state_dict': full_model[1].state_dict(),
-                'loss': full_model[2],
-            }, weights_path)
-        
-        if 'last.pth' in os.listdir(weights_location):
-            os.remove(f'{weights_location}/last.pth')
-            
-        weights_path = f'{weights_location}/last.pth'
-        torch.save({
-            'epoch': full_model[3],
-            'model_state_dict': full_model[0].state_dict(),
-            'optimizer_state_dict': full_model[1].state_dict(),
-            'loss': full_model[2],
-        }, weights_path)
-
 
 
 # training function
@@ -97,7 +54,7 @@ def fit(model, dataloader, data, TrainMetrics):
         outputs = outputs.float().cpu()
         keypoints = keypoints.float().cpu()
 
-        train_acc += utils.accuracy(outputs, keypoints)
+        train_acc += accuracy(outputs, keypoints)
         # Torchmetrics
         TrainMetrics['r2'](outputs, keypoints)
         TrainMetrics["meanSquared"](outputs, keypoints)
@@ -145,14 +102,13 @@ def validate(model, dataloader, data, epoch, ValidMetrics):
                 counter += 1
             # plot the predicted validation keypoints after every...
             # ... predefined number of epochs
-            if (epoch+1) % 1 == 0 and i == 0:
-                utils.valid_keypoints_plot(image, outputs, keypoints, epoch)
+            valid_keypoints_plot(image, outputs, keypoints, epoch)
             
             # Accuracy
             outputs = outputs.float().cpu()
             keypoints = keypoints.float().cpu()
             
-            valid_acc += utils.accuracy(outputs, keypoints)
+            valid_acc += accuracy(outputs, keypoints)
             # Torchmetrics
             ValidMetrics['r2'](outputs, keypoints)
             ValidMetrics["meanSquared"](outputs, keypoints)
@@ -201,6 +157,12 @@ criterion = nn.SmoothL1Loss()
 model_directory = f'{config.OUTPUT_PATH}/{config.CURRENT_MODEL}'
 if not os.path.exists(model_directory):
     os.makedirs(model_directory)
+if not os.path.exists(f'{model_directory}/weights'):
+    os.makedirs(f'{model_directory}/weights')
+if not os.path.exists(f'{model_directory}/validation'):
+    os.makedirs(f'{model_directory}/validation')
+if not os.path.exists(f'{model_directory}/inference_fp16'):
+    os.makedirs(f'{model_directory}/inference_fp16')
 
 train_loss = []
 val_loss = []

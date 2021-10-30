@@ -3,6 +3,7 @@ import numpy as np
 import config
 import random
 import torch
+import os
 
 def valid_keypoints_plot(image, outputs, orig_keypoints, epoch):
     """
@@ -29,7 +30,7 @@ def valid_keypoints_plot(image, outputs, orig_keypoints, epoch):
     for p in range(output_keypoint.shape[0]):
         plt.plot(output_keypoint[p, 0], output_keypoint[p, 1], 'r.')
         plt.plot(orig_keypoint[p, 0], orig_keypoint[p, 1], 'b.')
-    plt.savefig(f"{config.OUTPUT_PATH}/val_epoch_{epoch}.png")
+    plt.savefig(f"{config.OUTPUT_PATH}/{config.CURRENT_MODEL}/validation/val_epoch_{epoch}.png")
     plt.close()
 
 def dataset_keypoints_plot(data):
@@ -105,3 +106,46 @@ def accuracy(outputs_tensor, keypoints_tensor):
   avg_acc = avg_acc / num_batches
 
   return avg_acc
+
+
+def save_model(validation_loss, full_model):
+    # full_model -> Tuple containing 'model', 'optimizer', 'criterion', 'epoch'
+
+    weights_location = f'{config.OUTPUT_PATH}/{config.CURRENT_MODEL}/weights'
+    if not os.path.exists(weights_location):
+        os.makedirs(weights_location)
+    
+    # For the first iteration
+    if 'last.pth' not in os.listdir(weights_location) and 'best.pth' not in os.listdir(weights_location):
+        weights_path = f'{weights_location}/last.pth'
+        torch.save({
+            'epoch': full_model[3],
+            'model_state_dict': full_model[0].state_dict(),
+            'optimizer_state_dict': full_model[1].state_dict(),
+            'loss': full_model[2],
+        }, weights_path)
+
+    else:
+        # Saving the best model for the least validation loss
+        if validation_loss[-1] == min(validation_loss):
+            if 'best.pth' in os.listdir(weights_location):
+                os.remove(f'{weights_location}/best.pth')
+            
+            weights_path = f'{weights_location}/best.pth'
+            torch.save({
+                'epoch': full_model[3],
+                'model_state_dict': full_model[0].state_dict(),
+                'optimizer_state_dict': full_model[1].state_dict(),
+                'loss': full_model[2],
+            }, weights_path)
+        
+        if 'last.pth' in os.listdir(weights_location):
+            os.remove(f'{weights_location}/last.pth')
+            
+        weights_path = f'{weights_location}/last.pth'
+        torch.save({
+            'epoch': full_model[3],
+            'model_state_dict': full_model[0].state_dict(),
+            'optimizer_state_dict': full_model[1].state_dict(),
+            'loss': full_model[2],
+        }, weights_path)
