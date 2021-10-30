@@ -70,8 +70,6 @@ def fit(model, dataloader, data):
         
         train_f1 += (2 * precision * recall) / (precision + recall)
 
-
-
         # Torchmetrics
         # TrainMetrics['accuracy'](outputs, keypoints)
         # TrainMetrics["area_under_curve"](outputs, keypoints)
