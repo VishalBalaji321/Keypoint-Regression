@@ -1,10 +1,17 @@
 import torch
 
+DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+print(f"PyTorch Detected DEVICE: {DEVICE}")
+
 # constant paths
 ROOT_PATH = 'Keypoint-Regression/input/ConeKeypoints'
 OUTPUT_PATH = 'Keypoint-Regression/outputs'
-
 IMG_SIZE = 80
+
+# DEBUG
+# show dataset keypoint plot
+SHOW_DATASET_PLOT = False
+INFER_BATCH_SIZES = [1, 2, 4, 8, 16, 24, 32]
 
 # learning parameters
 BATCH_SIZE = 32
@@ -13,16 +20,8 @@ EPOCHS = 50
 DECAY_EPOCH = 100
 DECAY_LR = 0.0005
 
-DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-
-# show dataset keypoint plot
-SHOW_DATASET_PLOT = False
-
-print(f"PyTorch Detected DEVICE: {DEVICE}")
-
 # Models
 CURRENT_MODEL = 'tf_mobilenetv3_small_100'
-
 models_to_evaluate = [   
     'efficientnet_b0',
     'efficientnet_b1_pruned',

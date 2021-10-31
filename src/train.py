@@ -11,6 +11,8 @@ import statistics as s
 import os
 import torchmetrics as tm
 import csv
+from torch.utils.data import DataLoader
+from inference import InferDataloader
 
 from model import KeypointCustom
 from dataset import train_data, train_loader, valid_data, valid_loader
@@ -143,10 +145,10 @@ final_model_summary_list = []
 
 for modelName in config.models_to_evaluate:
     config.CURRENT_MODEL = modelName
-    # model 
-    #model = KeypointResNet(pretrained=True, requires_grad=True, model_name=config.RESNET_MODEL).to(config.DEVICE)
-    #model = KeypointEfficientNet(pretrained=True, requires_grad=True)
-    model = KeypointCustom(isPretrained=False, requires_grad=True, fineTuning=False,model_name=config.CURRENT_MODEL)
+    print(f"\nTraining Model: {config.CURRENT_MODEL}")
+    
+    # Loading the model
+    model = KeypointCustom(isPretrained=False, requires_grad=True, fineTuning=False, model_name=config.CURRENT_MODEL)
     model = model.return_loaded_model().to(config.DEVICE)
 
     # optimizer
@@ -156,6 +158,7 @@ for modelName in config.models_to_evaluate:
     # ... or MSELoss -> Use this when working with GrayScale Images
     criterion = nn.SmoothL1Loss()
 
+    # Creating the required folder directory
     model_directory = f'{config.OUTPUT_PATH}/{config.CURRENT_MODEL}'
     if not os.path.exists(model_directory):
         os.makedirs(model_directory)
@@ -166,6 +169,7 @@ for modelName in config.models_to_evaluate:
     if not os.path.exists(f'{model_directory}/inference_fp16'):
         os.makedirs(f'{model_directory}/inference_fp16')
 
+    # These lists will be holding the model metrics which will later be used for analysis
     train_loss = []
     train_acc = []
     train_r2 = []
@@ -190,7 +194,7 @@ for modelName in config.models_to_evaluate:
             for _ in optimizer.param_groups:
                 _['lr'] = config.DECAY_LR
 
-        print(f"Epoch {epoch+1} of {config.EPOCHS}")
+        print(f"Epoch {epoch+1} of {config.EPOCHS} (model: {config.CURRENT_MODEL})")
         
         start_epoch = time.time()
         train_data = fit(model, train_loader, train_data, TrainMetrics=model_metrics)
@@ -229,8 +233,9 @@ for modelName in config.models_to_evaluate:
 
     print(f"Total Training Time: {total_train_time} min")
     print(f"Average train time per epoch: {avg_epoch_train_time}s")
-    print(f"Average inference time per image: {avg_epoch_valid_time}s")
+    print(f"Average validation time per epoch: {avg_epoch_valid_time}s")
 
+    # This plots graphs in the model directory between training and validation for different metrics
     plot_comparison_graph(train_loss, val_loss, "Training loss", "Validation loss", "Loss")
     plot_comparison_graph(train_acc, val_acc, "Training accuracy", "Validation accuracy", "Accuracy")
     plot_comparison_graph(train_r2, val_r2, "Training R2", "Validation R2", "R2 Score")
@@ -238,15 +243,42 @@ for modelName in config.models_to_evaluate:
     plot_comparison_graph(train_msl, val_msl, "Training Error", "Validation Error", "Mean Squared Log Error")
     plot_comparison_graph(train_ma, val_ma, "Training Error", "Validation Error", "Mean Absolute Error")
 
+    # Testing inference with different batch sizes. Not meant for checking accuracy
+    inference_avg_fps = []
+    for infer_batch_size in config.INFER_BATCH_SIZES:
+        test_data = DataLoader(
+            train_data, 
+            batch_size=infer_batch_size, 
+            shuffle=True
+        )
+        
+        if infer_batch_size == 1:
+            SavePath = f'{model_directory}/inference_fp16/{infer_batch_size}'
+            if not os.path.exists(SavePath):
+                os.makedirs(SavePath)
+            inference_avg_fps.append(InferDataloader(model, test_data, save_path=SavePath))
+        else:
+            inference_avg_fps.append(InferDataloader(model, test_data))
+        
+
+    # Exporting all the metrics into a dict file which will later be parsed into a .csv file
     model_summary = {
         'Model name': config.CURRENT_MODEL,
         'Final validation accuracy': val_acc[-1],
         'Final training accuracy': train_acc[-1],
         
-        'Total training time': total_train_time,
-        'Average Epoch training time': avg_epoch_train_time,
-        'Average Epoch validation time': avg_epoch_valid_time,
+        'Total training time(min)': total_train_time,
+        'Average Epoch training time(s)': avg_epoch_train_time,
+        'Average Epoch validation time(s)': avg_epoch_valid_time,
         
+        'Inference_BATCH_SIZE_1': inference_avg_fps[0],
+        'Inference_BATCH_SIZE_2': inference_avg_fps[1],
+        'Inference_BATCH_SIZE_4': inference_avg_fps[2],
+        'Inference_BATCH_SIZE_8': inference_avg_fps[3],
+        'Inference_BATCH_SIZE_16': inference_avg_fps[4],
+        'Inference_BATCH_SIZE_24': inference_avg_fps[5],
+        'Inference_BATCH_SIZE_32': inference_avg_fps[6],
+
         'Final validation loss': val_loss[-1],
         'Final training loss': train_loss[-1],
         'Final validation R2': val_r2[-1],
@@ -259,7 +291,7 @@ for modelName in config.models_to_evaluate:
         'Final training MeanAbsolute Error': train_ma[-1]
     }
 
-    # Dumping all the other metrics into the csv file for future use
+    # Dumping all the other metrics into the .csv file for future use
     for num, data in enumerate(train_acc):
         model_summary[f'train_acc_{num + 1}'] = data
 
