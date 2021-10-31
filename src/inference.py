@@ -68,9 +68,9 @@ def InferDirectory(weights_path, input_path, output_path, modelName=config.CURRE
 
 def InferDataloader(model, inferBatchSize):
     test_data = DataLoader(
-            train_data, 
-            batch_size=inferBatchSize, 
-            shuffle=True
+        train_data, 
+        batch_size=inferBatchSize, 
+        shuffle=True
     )
 
     model.eval()
@@ -80,7 +80,7 @@ def InferDataloader(model, inferBatchSize):
     avg_fps = 0
     
     # calculate the number of batches
-    num_batches = int(len(test_data.dataset)/test_data.batch_size)
+    num_batches = int(len(train_data)/test_data.batch_size)
     
     with torch.no_grad():
         for _, data in tqdm(enumerate(test_data), total=num_batches):

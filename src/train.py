@@ -12,7 +12,8 @@ import os
 import torchmetrics as tm
 import csv
 from torch.utils.data import DataLoader
-from inference import InferDataloader
+from inference import InferFrame
+import cv2
 
 from model import KeypointCustom
 from dataset import train_data, train_loader, valid_data, valid_loader
@@ -235,19 +236,59 @@ for modelName in config.models_to_evaluate:
     print(f"Average train time per epoch: {avg_epoch_train_time}s")
     print(f"Average validation time per epoch: {avg_epoch_valid_time}s")
 
-    # This plots graphs in the model directory between training and validation for different metrics
-    plot_comparison_graph(train_loss, val_loss, "Training loss", "Validation loss", "Loss")
-    plot_comparison_graph(train_acc, val_acc, "Training accuracy", "Validation accuracy", "Accuracy")
-    plot_comparison_graph(train_r2, val_r2, "Training R2", "Validation R2", "R2 Score")
-    plot_comparison_graph(train_ms, val_ms, "Training Error", "Validation Error", "Mean Squared Error")
-    plot_comparison_graph(train_msl, val_msl, "Training Error", "Validation Error", "Mean Squared Log Error")
-    plot_comparison_graph(train_ma, val_ma, "Training Error", "Validation Error", "Mean Absolute Error")
-
+   
     # Testing inference with different batch sizes. Not meant for checking accuracy
     inference_avg_fps = []
     for infer_batch_size in config.INFER_BATCH_SIZES:
-        inference_avg_fps.append(InferDataloader(model, infer_batch_size))
+        test_data = DataLoader(
+            train_data, 
+            batch_size=infer_batch_size, 
+            shuffle=True
+        )
+
+        model.eval()
+        model.half()
+
+        cone_counter = 1
+        avg_fps = 0
         
+        # calculate the number of batches
+        num_batches = int(len(train_data)/test_data.batch_size)
+        
+        with torch.no_grad():
+            for _, data in tqdm(enumerate(test_data), total=num_batches):
+                image = data['image']
+                final_img, fps = InferFrame(model, image)
+                
+                if infer_batch_size == 1:
+                    cv2.imwrite(f'{config.OUTPUT_PATH}/{config.CURRENT_MODEL}/inference_fp16/cone_{cone_counter}.jpg', final_img)
+                
+                avg_fps += fps
+                cone_counter += 1
+        
+        avg_fps = round(avg_fps / cone_counter, 2)
+
+        inference_avg_fps.append(avg_fps)
+
+    # This plots graphs in the model directory between training and validation for different metrics
+    dataToPlot = (
+        ((train_loss, val_loss), "Training loss", "Validation loss", "Loss", "min"),
+        ((train_acc, val_acc), "Training accuracy", "Validation accuracy", "Accuracy", 'max'),
+        (inference_avg_fps, 'inference fps', 'Inference Speed')
+        ((train_r2, val_r2), "Training R2", "Validation R2", "R2 Score", 'min'),
+        ((train_ms, val_ms), "Training Error", "Validation Error", "Mean Squared Error", 'min'),
+        ((train_msl, val_msl), "Training Error", "Validation Error", "Mean Squared Log Error", 'min'),
+        ((train_ma, val_ma), "Training Error", "Validation Error", "Mean Absolute Error", 'min')
+    )
+    
+    plot_comparison_graph(dataToPlot)
+    # plot_comparison_graph(train_acc, val_acc, "Training accuracy", "Validation accuracy", "Accuracy")
+    
+    # plot_comparison_graph(train_r2, val_r2, "Training R2", "Validation R2", "R2 Score")
+    # plot_comparison_graph(train_ms, val_ms, "Training Error", "Validation Error", "Mean Squared Error")
+    # plot_comparison_graph(train_msl, val_msl, "Training Error", "Validation Error", "Mean Squared Log Error")
+    # plot_comparison_graph(train_ma, val_ma, "Training Error", "Validation Error", "Mean Absolute Error")
+
     # Exporting all the metrics into a dict file which will later be parsed into a .csv file
     model_summary = {
         'Model name': config.CURRENT_MODEL,
