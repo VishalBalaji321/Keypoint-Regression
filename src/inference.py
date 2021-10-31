@@ -6,7 +6,8 @@ import config
 import time
 from model import KeypointEfficientNet, KeypointResNet, KeypointCustom
 import tqdm
-
+from torch.utils.data import DataLoader
+from dataset import train_data
 
 def InferFrame(model, frame):
     t1 = time.time()
@@ -65,7 +66,13 @@ def InferDirectory(weights_path, input_path, output_path, modelName=config.CURRE
             
             cv2.imwrite(f'{output_path}/{files}', final_img)
 
-def InferDataloader(model, dataloader, save_path=None):
+def InferDataloader(model, inferBatchSize):
+    test_data = DataLoader(
+            train_data, 
+            batch_size=inferBatchSize, 
+            shuffle=True
+    )
+
     model.eval()
     model.half()
 
@@ -73,19 +80,20 @@ def InferDataloader(model, dataloader, save_path=None):
     avg_fps = 0
     
     # calculate the number of batches
-    num_batches = int(len(dataloader.dataset)/dataloader.batch_size)
+    num_batches = int(len(test_data.dataset)/test_data.batch_size)
     
     with torch.no_grad():
-        for _, data in tqdm(enumerate(dataloader), total=num_batches):
+        for _, data in tqdm(enumerate(test_data), total=num_batches):
             image = data['image']
             final_img, fps = InferFrame(model, image)
             
-            if save_path is not None:
-                cv2.imwrite(f'{save_path}/cone_{cone_counter}.jpg', final_img)
+            if inferBatchSize == 1:
+                cv2.imwrite(f'{config.OUTPUT_PATH}/{config.CURRENT_MODEL}/inference_fp16/cone_{cone_counter}.jpg', final_img)
             
             avg_fps += fps
             cone_counter += 1
     
     avg_fps = round(avg_fps / cone_counter, 2)
+
 
     return avg_fps

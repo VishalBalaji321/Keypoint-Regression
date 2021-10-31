@@ -166,8 +166,8 @@ for modelName in config.models_to_evaluate:
         os.makedirs(f'{model_directory}/weights')
     if not os.path.exists(f'{model_directory}/validation'):
         os.makedirs(f'{model_directory}/validation')
-    if not os.path.exists(f'{model_directory}/inference_fp16'):
-        os.makedirs(f'{model_directory}/inference_fp16')
+    if not os.path.exists(f'{model_directory}/inference_fp16_batch_size_1'):
+        os.makedirs(f'{model_directory}/inference_fp16_batch_size_1')
 
     # These lists will be holding the model metrics which will later be used for analysis
     train_loss = []
@@ -246,21 +246,8 @@ for modelName in config.models_to_evaluate:
     # Testing inference with different batch sizes. Not meant for checking accuracy
     inference_avg_fps = []
     for infer_batch_size in config.INFER_BATCH_SIZES:
-        test_data = DataLoader(
-            train_data, 
-            batch_size=infer_batch_size, 
-            shuffle=True
-        )
+        inference_avg_fps.append(InferDataloader(model, infer_batch_size))
         
-        if infer_batch_size == 1:
-            SavePath = f'{model_directory}/inference_fp16/{infer_batch_size}'
-            if not os.path.exists(SavePath):
-                os.makedirs(SavePath)
-            inference_avg_fps.append(InferDataloader(model, test_data, save_path=SavePath))
-        else:
-            inference_avg_fps.append(InferDataloader(model, test_data))
-        
-
     # Exporting all the metrics into a dict file which will later be parsed into a .csv file
     model_summary = {
         'Model name': config.CURRENT_MODEL,
