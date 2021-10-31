@@ -4,10 +4,10 @@ import cv2
 import os
 import config
 import time
-from model import KeypointEfficientNet, KeypointResNet, KeypointCustom
+from model import KeypointCustom
 import tqdm
 from torch.utils.data import DataLoader
-from dataset import train_data
+from dataset import train_data, train_loader
 
 def InferFrame(model, frame):
     t1 = time.time()
@@ -87,8 +87,8 @@ def InferDataloader(model, inferBatchSize):
             image = data['image']
             final_img, fps = InferFrame(model, image)
             
-            if inferBatchSize == 1:
-                cv2.imwrite(f'{config.OUTPUT_PATH}/{config.CURRENT_MODEL}/inference_fp16/cone_{cone_counter}.jpg', final_img)
+            # if inferBatchSize == 1:
+            #     cv2.imwrite(f'{config.OUTPUT_PATH}/{config.CURRENT_MODEL}/inference_fp16/cone_{cone_counter}.jpg', final_img)
             
             avg_fps += fps
             cone_counter += 1

@@ -132,3 +132,22 @@
 # ))
 
 
+import torch
+from model import KeypointCustom
+import config
+from inference import InferDataloader
+
+model = KeypointCustom(isPretrained=False, requires_grad=False, model_name='resnet 18')
+model = model.return_loaded_model().to(config.DEVICE)
+
+#checkpoint = torch.load('../weights/resnet18_30_epochs.pth', map_location=torch.device('cpu'))
+#checkpoint = torch.load('../weights/efficientNet-b2_full_25_epochs.pth', map_location=torch.device('cpu'))
+weights_path = ''
+
+checkpoint = torch.load(weights_path)
+model.load_state_dict(checkpoint['model_state_dict'])
+model.eval()
+model.cuda()
+model.half()
+
+print(InferDataloader(model, 1))
