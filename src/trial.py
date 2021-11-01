@@ -136,18 +136,23 @@ import torch
 from model import KeypointCustom
 import config
 from inference import InferDataloader
+from tqdm import tqdm
 
-model = KeypointCustom(isPretrained=False, requires_grad=False, model_name='resnet 18')
+model = KeypointCustom(isPretrained=False, requires_grad=False, model_name='tf_efficientnet_lite0')
 model = model.return_loaded_model().to(config.DEVICE)
 
 #checkpoint = torch.load('../weights/resnet18_30_epochs.pth', map_location=torch.device('cpu'))
 #checkpoint = torch.load('../weights/efficientNet-b2_full_25_epochs.pth', map_location=torch.device('cpu'))
-weights_path = ''
+weights_path = r'C:\Users\visha\Desktop\Schanzer Racing\keypoint_regression\Keypoint-Regression\weights\efficientNet_lite_0_50epochs.pth'
 
-checkpoint = torch.load(weights_path)
+checkpoint = torch.load(weights_path, map_location=torch.device('cpu'))
 model.load_state_dict(checkpoint['model_state_dict'])
 model.eval()
-model.cuda()
-model.half()
+#model.cuda()
+#model.half()
 
-print(InferDataloader(model, 1))
+inference_avg_fps = []
+for infer_batch_size in [1]:
+  inference_avg_fps.append(InferDataloader(model, infer_batch_size))
+
+print(inference_avg_fps)

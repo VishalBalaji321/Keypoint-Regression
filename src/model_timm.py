@@ -60,14 +60,14 @@ models_to_evaluate = [
     'resnet50d'
 ]
 
-#pprint(timm.list_models(pretrained=True))
-model = timm.create_model('resnet50d', pretrained=False, num_classes=16)
-pprint(model)
+pprint(timm.list_models(pretrained=True))
+# model = timm.create_model('resnet50d', pretrained=False, num_classes=16)
+# pprint(model)
 
-for name, param in model.named_parameters():
-    if 'classifier' not in name:
-        #pass
-        param.requires_grad = False
+# for name, param in model.named_parameters():
+#     if 'classifier' not in name:
+#         #pass
+#         param.requires_grad = False
 
 #summary(model, (3, 80, 80))
 

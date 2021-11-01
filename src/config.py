@@ -4,8 +4,8 @@ DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 print(f"PyTorch Detected DEVICE: {DEVICE}")
 
 # constant paths
-ROOT_PATH = 'Keypoint-Regression/input/ConeKeypoints'
-OUTPUT_PATH = 'Keypoint-Regression/outputs'
+ROOT_PATH = '../input/ConeKeypoints'
+OUTPUT_PATH = '../outputs'
 IMG_SIZE = 80
 
 # DEBUG
